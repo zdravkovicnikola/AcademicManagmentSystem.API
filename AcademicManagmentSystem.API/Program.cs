@@ -1,3 +1,5 @@
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +18,11 @@ builder.Services.AddCors(options =>
 }); //Ova konfiguracija omogucava bilo kojoj spoljnoj strani da pristupi resursima
     //na nasem serveru bez ogranicenja, sto moze biti korisno u razvojnom okruzenju,
     //ali moze biti opasno u produkcionom okruzenju
+
+
+builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration)); //Ovim postavkama omogucavamo da nasa aplikacija koristi Serilog za logovanje, pri cemu logovi mogu biti ispisani na konzoli. Serilog omogucava detaljno logovanje razlicitih dogadjaja u nasoj aplikaciji, sto nam pomaze u pronalazenju i resavanju problema.
+
+
 
 var app = builder.Build();
 
