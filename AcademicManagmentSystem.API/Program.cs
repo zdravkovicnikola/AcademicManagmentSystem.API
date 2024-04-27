@@ -1,7 +1,14 @@
+using AcademicManagmentSystem.API.Data;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionSting = builder.Configuration.GetConnectionString("AcademicManagmentSystemDbConnectionString");
+builder.Services.AddDbContext<AcademicManagmentSystemDbContext>(options =>
+{
+    options.UseSqlServer(connectionSting);
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -32,6 +39,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging(); // ovo je middleware koji dolazi uz Serilog i koristi se za automatsko logovanje informacija o HTTP zahtevima i odgovorima
 
 app.UseCors("AllowAll"); //ovde samo pozivamo tu politiku koju smo napravili
 
