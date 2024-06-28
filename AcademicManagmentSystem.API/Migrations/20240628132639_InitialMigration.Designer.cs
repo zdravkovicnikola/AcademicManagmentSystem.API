@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademicManagmentSystem.API.Migrations
 {
     [DbContext(typeof(AcademicManagmentSystemDbContext))]
-    [Migration("20240627125203_InitialMigration")]
+    [Migration("20240628132639_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -45,6 +45,104 @@ namespace AcademicManagmentSystem.API.Migrations
                     b.HasIndex("PredmetId");
 
                     b.ToTable("Delovi");
+
+                    b.HasData(
+                        new
+                        {
+                            DeoId = 1,
+                            Naziv = "Pismeni deo",
+                            PredmetId = 1
+                        },
+                        new
+                        {
+                            DeoId = 2,
+                            Naziv = "Usmeni deo",
+                            PredmetId = 1
+                        },
+                        new
+                        {
+                            DeoId = 3,
+                            Naziv = "Prvi kolokvijum",
+                            PredmetId = 1
+                        },
+                        new
+                        {
+                            DeoId = 4,
+                            Naziv = "Drugi kolokvijum",
+                            PredmetId = 1
+                        },
+                        new
+                        {
+                            DeoId = 5,
+                            Naziv = "Pismeni deo",
+                            PredmetId = 2
+                        },
+                        new
+                        {
+                            DeoId = 6,
+                            Naziv = "Usmeni deo",
+                            PredmetId = 2
+                        },
+                        new
+                        {
+                            DeoId = 7,
+                            Naziv = "Prvi kolokvijum",
+                            PredmetId = 2
+                        },
+                        new
+                        {
+                            DeoId = 8,
+                            Naziv = "Drugi kolokvijum",
+                            PredmetId = 2
+                        },
+                        new
+                        {
+                            DeoId = 9,
+                            Naziv = "Pismeni deo",
+                            PredmetId = 3
+                        },
+                        new
+                        {
+                            DeoId = 10,
+                            Naziv = "Usmeni deo",
+                            PredmetId = 3
+                        },
+                        new
+                        {
+                            DeoId = 11,
+                            Naziv = "Prvi kolokvijum",
+                            PredmetId = 3
+                        },
+                        new
+                        {
+                            DeoId = 12,
+                            Naziv = "Drugi kolokvijum",
+                            PredmetId = 3
+                        },
+                        new
+                        {
+                            DeoId = 13,
+                            Naziv = "Pismeni deo",
+                            PredmetId = 4
+                        },
+                        new
+                        {
+                            DeoId = 14,
+                            Naziv = "Usmeni deo",
+                            PredmetId = 4
+                        },
+                        new
+                        {
+                            DeoId = 15,
+                            Naziv = "Prvi kolokvijum",
+                            PredmetId = 4
+                        },
+                        new
+                        {
+                            DeoId = 16,
+                            Naziv = "Drugi kolokvijum",
+                            PredmetId = 4
+                        });
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Katedra", b =>
@@ -62,6 +160,23 @@ namespace AcademicManagmentSystem.API.Migrations
                     b.HasKey("KatedraID");
 
                     b.ToTable("Katedre");
+
+                    b.HasData(
+                        new
+                        {
+                            KatedraID = 1,
+                            Naziv = "Katedra 1"
+                        },
+                        new
+                        {
+                            KatedraID = 2,
+                            Naziv = "Katedra 2"
+                        },
+                        new
+                        {
+                            KatedraID = 3,
+                            Naziv = "Katedra 3"
+                        });
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Predavac", b =>
@@ -100,6 +215,58 @@ namespace AcademicManagmentSystem.API.Migrations
                     b.HasIndex("KatedraId");
 
                     b.ToTable("Predavaci");
+
+                    b.HasData(
+                        new
+                        {
+                            PredavacId = 1,
+                            Email = "petar.petrovic@example.com",
+                            Ime = "Petar",
+                            KatedraId = 1,
+                            Password = "password123",
+                            Prezime = "Petrovic",
+                            Username = "ppetrovic"
+                        },
+                        new
+                        {
+                            PredavacId = 2,
+                            Email = "marko.markovic@example.com",
+                            Ime = "Marko",
+                            KatedraId = 2,
+                            Password = "password123",
+                            Prezime = "Markovic",
+                            Username = "mmarkovic"
+                        },
+                        new
+                        {
+                            PredavacId = 3,
+                            Email = "zarko.zarkovic@example.com",
+                            Ime = "Zarko",
+                            KatedraId = 2,
+                            Password = "password123",
+                            Prezime = "Zarkovic",
+                            Username = "zzarkovic"
+                        },
+                        new
+                        {
+                            PredavacId = 4,
+                            Email = "janko.jankovic@example.com",
+                            Ime = "Janko",
+                            KatedraId = 3,
+                            Password = "password123",
+                            Prezime = "Jankovic",
+                            Username = "jjankovic"
+                        },
+                        new
+                        {
+                            PredavacId = 5,
+                            Email = "mirko.mirkovic@example.com",
+                            Ime = "Mirko",
+                            KatedraId = 1,
+                            Password = "password123",
+                            Prezime = "Mirkovic",
+                            Username = "mmirkovic"
+                        });
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Predmet", b =>
@@ -121,6 +288,32 @@ namespace AcademicManagmentSystem.API.Migrations
                     b.HasKey("PredmetId");
 
                     b.ToTable("Predmeti");
+
+                    b.HasData(
+                        new
+                        {
+                            PredmetId = 1,
+                            Naziv = "Matematika 1",
+                            Sifra = "MAT101"
+                        },
+                        new
+                        {
+                            PredmetId = 2,
+                            Naziv = "Osnove Programiranja",
+                            Sifra = "INF101"
+                        },
+                        new
+                        {
+                            PredmetId = 3,
+                            Naziv = "Matematika 2",
+                            Sifra = "MAT202"
+                        },
+                        new
+                        {
+                            PredmetId = 4,
+                            Naziv = "Osnove Organizacije",
+                            Sifra = "ORG101"
+                        });
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.PredmetPredavac", b =>
@@ -136,6 +329,38 @@ namespace AcademicManagmentSystem.API.Migrations
                     b.HasIndex("PredavacId");
 
                     b.ToTable("PredmetPredavaci");
+
+                    b.HasData(
+                        new
+                        {
+                            PredmetId = 2,
+                            PredavacId = 1
+                        },
+                        new
+                        {
+                            PredmetId = 1,
+                            PredavacId = 2
+                        },
+                        new
+                        {
+                            PredmetId = 3,
+                            PredavacId = 2
+                        },
+                        new
+                        {
+                            PredmetId = 1,
+                            PredavacId = 3
+                        },
+                        new
+                        {
+                            PredmetId = 4,
+                            PredavacId = 4
+                        },
+                        new
+                        {
+                            PredmetId = 2,
+                            PredavacId = 5
+                        });
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Rezultat", b =>

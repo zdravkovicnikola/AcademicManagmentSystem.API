@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace AcademicManagmentSystem.API.Migrations
 {
     /// <inheritdoc />
@@ -148,6 +150,75 @@ namespace AcademicManagmentSystem.API.Migrations
                         principalTable: "Studenti",
                         principalColumn: "StudentId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Katedre",
+                columns: new[] { "KatedraID", "Naziv" },
+                values: new object[,]
+                {
+                    { 1, "Katedra 1" },
+                    { 2, "Katedra 2" },
+                    { 3, "Katedra 3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Predmeti",
+                columns: new[] { "PredmetId", "Naziv", "Sifra" },
+                values: new object[,]
+                {
+                    { 1, "Matematika 1", "MAT101" },
+                    { 2, "Osnove Programiranja", "INF101" },
+                    { 3, "Matematika 2", "MAT202" },
+                    { 4, "Osnove Organizacije", "ORG101" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Delovi",
+                columns: new[] { "DeoId", "Naziv", "PredmetId" },
+                values: new object[,]
+                {
+                    { 1, "Pismeni deo", 1 },
+                    { 2, "Usmeni deo", 1 },
+                    { 3, "Prvi kolokvijum", 1 },
+                    { 4, "Drugi kolokvijum", 1 },
+                    { 5, "Pismeni deo", 2 },
+                    { 6, "Usmeni deo", 2 },
+                    { 7, "Prvi kolokvijum", 2 },
+                    { 8, "Drugi kolokvijum", 2 },
+                    { 9, "Pismeni deo", 3 },
+                    { 10, "Usmeni deo", 3 },
+                    { 11, "Prvi kolokvijum", 3 },
+                    { 12, "Drugi kolokvijum", 3 },
+                    { 13, "Pismeni deo", 4 },
+                    { 14, "Usmeni deo", 4 },
+                    { 15, "Prvi kolokvijum", 4 },
+                    { 16, "Drugi kolokvijum", 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Predavaci",
+                columns: new[] { "PredavacId", "Email", "Ime", "KatedraId", "Password", "Prezime", "Username" },
+                values: new object[,]
+                {
+                    { 1, "petar.petrovic@example.com", "Petar", 1, "password123", "Petrovic", "ppetrovic" },
+                    { 2, "marko.markovic@example.com", "Marko", 2, "password123", "Markovic", "mmarkovic" },
+                    { 3, "zarko.zarkovic@example.com", "Zarko", 2, "password123", "Zarkovic", "zzarkovic" },
+                    { 4, "janko.jankovic@example.com", "Janko", 3, "password123", "Jankovic", "jjankovic" },
+                    { 5, "mirko.mirkovic@example.com", "Mirko", 1, "password123", "Mirkovic", "mmirkovic" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PredmetPredavaci",
+                columns: new[] { "PredavacId", "PredmetId" },
+                values: new object[,]
+                {
+                    { 2, 1 },
+                    { 3, 1 },
+                    { 1, 2 },
+                    { 5, 2 },
+                    { 2, 3 },
+                    { 4, 4 }
                 });
 
             migrationBuilder.CreateIndex(
