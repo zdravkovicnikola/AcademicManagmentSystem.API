@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AcademicManagmentSystem.API.Data;
+using AcademicManagmentSystem.API.Models.Predmeti;
+using AutoMapper;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
@@ -14,10 +16,12 @@ namespace AcademicManagmentSystem.API.Controllers
     public class PredmetiController : ControllerBase
     {
         private readonly AcademicManagmentSystemDbContext _context;
+        private readonly IMapper _mapper;
 
-        public PredmetiController(AcademicManagmentSystemDbContext context)
+        public PredmetiController(AcademicManagmentSystemDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Predmeti
@@ -76,8 +80,16 @@ namespace AcademicManagmentSystem.API.Controllers
         // POST: api/Predmeti
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Predmet>> PostPredmet(Predmet predmet)
+        public async Task<ActionResult<Predmet>> PostPredmet(CreatePredmetDto kreirajPredmetDto)
         {
+            //var predmet = new Predmet
+            //{
+            //    Naziv = kreirajPredmet.Naziv,
+            //    Sifra = kreirajPredmet.Sifra
+            //};
+
+            var predmet = _mapper.Map<Predmet>(kreirajPredmetDto);
+
             _context.Predmeti.Add(predmet);
             await _context.SaveChangesAsync();
 
