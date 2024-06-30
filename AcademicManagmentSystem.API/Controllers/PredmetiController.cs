@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AcademicManagmentSystem.API.Data;
 using AcademicManagmentSystem.API.Models.Predmeti;
 using AutoMapper;
+using AcademicManagmentSystem.API.Models.Predavaci;
+using AcademicManagmentSystem.API.Models.Katedre;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
@@ -26,24 +28,62 @@ namespace AcademicManagmentSystem.API.Controllers
 
         // GET: api/Predmeti
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Predmet>>> GetPredmeti()
+        public async Task<ActionResult<IEnumerable<GetPredmetDto>>> GetPredmeti()
         {
             //Kao da pise SELECT * FROM PREMDETI
-            return Ok(await _context.Predmeti.ToListAsync()); // Ok-om samo vracamo 200 odg umesto 201 koji bi se generealno vracao kao uspesan odg (estetika)
+            // return Ok(await _context.Predmeti.ToListAsync()); // Ok-om samo vracamo 200 odg umesto 201 koji bi se generealno vracao kao uspesan odg (estetika)
+
+            var predmeti = await _context.Predmeti.ToListAsync();
+            var records = _mapper.Map<List<GetPredmetDto>>(predmeti);
+            return Ok(records);
         }
 
         // GET: api/Predmeti/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Predmet>> GetPredmet(int id)
+        public async Task<ActionResult<GetPredmetDetailsDto>> GetPredmet(int id)
         {
-            var predmet = await _context.Predmeti.FindAsync(id);
+            var predmet = await _context.Predmeti
+        .Include(p => p.PredmetPredavaci )
+            .ThenInclude(pp => pp.Predavac)
+                .ThenInclude(pr => pr.Katedra)
+                    
+        //.Where(p => p.PredmetId == id)
+        //.Select(p => new GetPredmetDetailsDto
+        //{
+        //    Id = p.PredmetId,
+        //    Naziv = p.Naziv,
+        //    Sifra = p.Sifra,
+        //    PredmetPredavaci = p.PredmetPredavaci.Select(pp => new GetPredmetPredavacDto
+        //    {
+        //        PredavacId = pp.PredavacId,
+        //        Predavac = new GetPredavacDto
+        //        {
+        //            PredavacId = pp.Predavac.PredavacId,
+        //            Ime = pp.Predavac.Ime,
+        //            Prezime = pp.Predavac.Prezime,
+        //            Username = pp.Predavac.Username,
+        //            KatedraId = pp.Predavac.KatedraId,
+        //            Katedra = new GetKatedraDto
+        //            {
+        //                KatedraId = pp.Predavac.Katedra.KatedraID,
+        //                Naziv = pp.Predavac.Katedra.Naziv
+        //            }
+        //        }
+        //    }).ToList()
+        //})
+        .FirstOrDefaultAsync(p => p.PredmetId == id);
 
-            if (predmet == null)
+            predmet = await _context.Predmeti.Include(p => p.Delovi)
+                                                .ThenInclude(pr => pr.Rezultati)
+                                                    .ThenInclude(ps => ps.Student)
+                                             .FirstOrDefaultAsync(p => p.PredmetId == id);
+            var predmetDto = _mapper.Map<GetPredmetDetailsDto>(predmet);
+            if (predmetDto == null)
             {
                 return NotFound("Ne postoji trazeni predemt!");
             }
 
-            return predmet;
+            return predmetDto;
         }
 
         // PUT: api/Predmeti/5
