@@ -10,6 +10,7 @@ using AcademicManagmentSystem.API.Models.Predmeti;
 using AutoMapper;
 using AcademicManagmentSystem.API.Models.Predavaci;
 using AcademicManagmentSystem.API.Models.Katedre;
+using AcademicManagmentSystem.API.Contracts;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
@@ -17,13 +18,13 @@ namespace AcademicManagmentSystem.API.Controllers
     [ApiController]
     public class PredmetiController : ControllerBase
     {
-        private readonly AcademicManagmentSystemDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IPredmetiRepository _predmetiRepository;
 
-        public PredmetiController(AcademicManagmentSystemDbContext context, IMapper mapper)
+        public PredmetiController(IMapper mapper, IPredmetiRepository predmeti)
         {
-            _context = context;
             _mapper = mapper;
+            _predmetiRepository = predmeti;
         }
 
         // GET: api/Predmeti
@@ -33,7 +34,7 @@ namespace AcademicManagmentSystem.API.Controllers
             //Kao da pise SELECT * FROM PREMDETI
             // return Ok(await _context.Predmeti.ToListAsync()); // Ok-om samo vracamo 200 odg umesto 201 koji bi se generealno vracao kao uspesan odg (estetika)
 
-            var predmeti = await _context.Predmeti.ToListAsync();
+            var predmeti = await _predmetiRepository.GetAllAsync();
             var records = _mapper.Map<List<GetPredmetDto>>(predmeti);
             return Ok(records);
         }
@@ -42,11 +43,8 @@ namespace AcademicManagmentSystem.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetPredmetDetailsDto>> GetPredmet(int id)
         {
-            var predmet = await _context.Predmeti
-        .Include(p => p.PredmetPredavaci )
-            .ThenInclude(pp => pp.Predavac)
-                .ThenInclude(pr => pr.Katedra)
-                    
+            var predmet = await _predmetiRepository.GetDetailsPredavac(id);
+            
         //.Where(p => p.PredmetId == id)
         //.Select(p => new GetPredmetDetailsDto
         //{
@@ -70,13 +68,9 @@ namespace AcademicManagmentSystem.API.Controllers
         //            }
         //        }
         //    }).ToList()
-        //})
-        .FirstOrDefaultAsync(p => p.PredmetId == id);
+        //}) .FirstOrDefaultAsync(p => p.PredmetId == id);
 
-            predmet = await _context.Predmeti.Include(p => p.Delovi)
-                                                .ThenInclude(pr => pr.Rezultati)
-                                                    .ThenInclude(ps => ps.Student)
-                                             .FirstOrDefaultAsync(p => p.PredmetId == id);
+            predmet = await _predmetiRepository.GetDetailsDeo(id);
             var predmetDto = _mapper.Map<GetPredmetDetailsDto>(predmet);
             if (predmetDto == null)
             {
@@ -96,24 +90,19 @@ namespace AcademicManagmentSystem.API.Controllers
                 return BadRequest();
             }
 
-            //_context.Entry(predmet).State = EntityState.Modified;
-
-            var predmet = await _context.Predmeti.FindAsync(id);
-
-            if(predmet == null)
+            var predmet = await _predmetiRepository.GetAsync(id);
+            if(!await _predmetiRepository.Exists(id))
             {
                 return NotFound();
             }
-
             _mapper.Map(updatePredmetDto, predmet);
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _predmetiRepository.UpdateAsync(predmet);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PredmetExists(id))
+                if (! await PredmetExists(id))
                 {
                     return NotFound();
                 }
@@ -122,7 +111,6 @@ namespace AcademicManagmentSystem.API.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 
@@ -181,17 +169,8 @@ namespace AcademicManagmentSystem.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Predmet>> PostPredmet(CreatePredmetDto kreirajPredmetDto)
         {
-            //var predmet = new Predmet
-            //{
-            //    Naziv = kreirajPredmet.Naziv,
-            //    Sifra = kreirajPredmet.Sifra
-            //};
-
             var predmet = _mapper.Map<Predmet>(kreirajPredmetDto);
-
-            _context.Predmeti.Add(predmet);
-            await _context.SaveChangesAsync();
-
+            await _predmetiRepository.AddAsync(predmet);
             return CreatedAtAction("GetPredmet", new { id = predmet.PredmetId }, predmet);
         }
 
@@ -199,21 +178,18 @@ namespace AcademicManagmentSystem.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePredmet(int id)
         {
-            var predmet = await _context.Predmeti.FindAsync(id);
+            var predmet = await _predmetiRepository.GetAsync(id);
             if (predmet == null)
             {
                 return NotFound();
             }
-
-            _context.Predmeti.Remove(predmet);
-            await _context.SaveChangesAsync();
-
+            await _predmetiRepository.DeleteAsync(id);
             return NoContent();
         }
 
-        private bool PredmetExists(int id)
+        private async Task<bool> PredmetExists(int id)
         {
-            return _context.Predmeti.Any(e => e.PredmetId == id);
+            return await _predmetiRepository.Exists(id);
         }
     }
 }

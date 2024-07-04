@@ -1,5 +1,7 @@
 using AcademicManagmentSystem.API.Configurations;
+using AcademicManagmentSystem.API.Contracts;
 using AcademicManagmentSystem.API.Data;
+using AcademicManagmentSystem.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -31,6 +33,9 @@ builder.Services.AddCors(options =>
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration)); //Ovim postavkama omogucavamo da nasa aplikacija koristi Serilog za logovanje, pri cemu logovi mogu biti ispisani na konzoli. Serilog omogucava detaljno logovanje razlicitih dogadjaja u nasoj aplikaciji, sto nam pomaze u pronalazenju i resavanju problema.
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));//ukljucujemo automapper u projekat 
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); //Ovo ce vaziti u duzini jednog HTTP zahteva
+builder.Services.AddScoped<IPredmetiRepository, PredmetiRepository>();//Ovo ce vaziti u duzini jednog HTTP zahteva
 
 var app = builder.Build();
 
