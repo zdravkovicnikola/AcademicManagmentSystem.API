@@ -2,10 +2,8 @@
 
 namespace AcademicManagmentSystem.API.Models.Predmeti
 {
-    public class CreatePredmetDto
+    public class CreatePredmetDto : BasePredmetDto
     {
-        [Required]
-        public string Naziv { get; set; }
-        public string Sifra { get; set; }
+        
     }
 }

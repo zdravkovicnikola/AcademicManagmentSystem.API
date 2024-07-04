@@ -89,14 +89,23 @@ namespace AcademicManagmentSystem.API.Controllers
         // PUT: api/Predmeti/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPredmet(int id, Predmet predmet)
+        public async Task<IActionResult> PutPredmet(int id, UpdatePredmetDto updatePredmetDto)
         {
-            if (id != predmet.PredmetId)
+            if (id != updatePredmetDto.predmetId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(predmet).State = EntityState.Modified;
+            //_context.Entry(predmet).State = EntityState.Modified;
+
+            var predmet = await _context.Predmeti.FindAsync(id);
+
+            if(predmet == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(updatePredmetDto, predmet);
 
             try
             {
@@ -117,8 +126,58 @@ namespace AcademicManagmentSystem.API.Controllers
             return NoContent();
         }
 
+
+        //////////////////////////////////////////////////////////////////////////
+        
+
+        //// PUT: api/Predmeti/5
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("api/Predmeti/details/{id}")]
+        //public async Task<IActionResult> PutDetailsPredmet(int id, UpdatePredmetDetailsDto updatePredmetDetailsDto)
+        //{
+        //    if (id != updatePredmetDetailsDto.predmetId)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    var predmet = await _context.Predmeti.FindAsync(id);
+
+        //    if (predmet == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _mapper.Map(updatePredmetDetailsDto, predmet);
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PredmetExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+
+        //////////////////////////////////////////////////////////////////////////
+
+
+
+
         // POST: api/Predmeti
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
+        
         [HttpPost]
         public async Task<ActionResult<Predmet>> PostPredmet(CreatePredmetDto kreirajPredmetDto)
         {

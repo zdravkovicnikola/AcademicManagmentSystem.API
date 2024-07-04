@@ -5,19 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcademicManagmentSystem.API.Models.Predmeti
 {
-    public class GetPredmetDto
+    public class GetPredmetDto : BasePredmetDto
     {
-        public int Id { get; set; }
-        public string Naziv { get; set; }
-        public string Sifra { get; set; }
+        public int PredmetId { get; set; }
     }
 
 
-    public class GetPredmetDetailsDto
+    public class GetPredmetDetailsDto : BasePredmetDto
     {
-        public int Id { get; set; }
-        public string Naziv { get; set; }
-        public string Sifra { get; set; }
+        public int PredmetId { get; set; }
 
         public IList<GetPredmetPredavacDto> PredmetPredavaci { get; set; }
 

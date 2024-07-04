@@ -30,6 +30,9 @@ namespace AcademicManagmentSystem.API.Configurations
             CreateMap<Deo, GetDeoDto>().ReverseMap();
             CreateMap<Rezultat, GetRezultatDto>().ReverseMap();
             CreateMap<Student, GetStudentDto>().ReverseMap();
+
+            //Azuriranje predmeta
+            CreateMap<Predmet, UpdatePredmetDto>().ReverseMap();
         }
     }
 }
