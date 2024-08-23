@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AcademicManagmentSystem.API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,7 +33,8 @@ namespace AcademicManagmentSystem.API.Migrations
                     PredmetId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Sifra = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Sifra = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ESPB = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,6 +54,19 @@ namespace AcademicManagmentSystem.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Studenti", x => x.StudentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tip",
+                columns: table => new
+                {
+                    TipId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tip", x => x.TipId);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,13 +94,45 @@ namespace AcademicManagmentSystem.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Ocene",
+                columns: table => new
+                {
+                    DatumPolaganja = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VrednostOcene = table.Column<int>(type: "int", nullable: false),
+                    PredmetId = table.Column<int>(type: "int", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ocene", x => x.DatumPolaganja);
+                    table.ForeignKey(
+                        name: "FK_Ocene_Predmeti_PredmetId",
+                        column: x => x.PredmetId,
+                        principalTable: "Predmeti",
+                        principalColumn: "PredmetId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ocene_Studenti_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Studenti",
+                        principalColumn: "StudentId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Delovi",
                 columns: table => new
                 {
                     DeoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PredmetId = table.Column<int>(type: "int", nullable: false)
+                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BrojPoena = table.Column<double>(type: "float", nullable: false),
+                    MaxBrPoena = table.Column<double>(type: "float", nullable: false),
+                    Polozio = table.Column<bool>(type: "bit", nullable: false),
+                    Napomena = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PredmetId = table.Column<int>(type: "int", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    TipId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,6 +143,17 @@ namespace AcademicManagmentSystem.API.Migrations
                         principalTable: "Predmeti",
                         principalColumn: "PredmetId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Delovi_Studenti_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Studenti",
+                        principalColumn: "StudentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Delovi_Tip_TipId",
+                        column: x => x.TipId,
+                        principalTable: "Tip",
+                        principalColumn: "TipId");
                 });
 
             migrationBuilder.CreateTable(
@@ -123,35 +180,6 @@ namespace AcademicManagmentSystem.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Rezultati",
-                columns: table => new
-                {
-                    RezultatId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Poeni = table.Column<double>(type: "float", nullable: false),
-                    Ocena = table.Column<int>(type: "int", nullable: false),
-                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeoId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rezultati", x => x.RezultatId);
-                    table.ForeignKey(
-                        name: "FK_Rezultati_Delovi_DeoId",
-                        column: x => x.DeoId,
-                        principalTable: "Delovi",
-                        principalColumn: "DeoId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Rezultati_Studenti_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Studenti",
-                        principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Katedre",
                 columns: new[] { "KatedraID", "Naziv" },
@@ -164,36 +192,13 @@ namespace AcademicManagmentSystem.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Predmeti",
-                columns: new[] { "PredmetId", "Naziv", "Sifra" },
+                columns: new[] { "PredmetId", "ESPB", "Naziv", "Sifra" },
                 values: new object[,]
                 {
-                    { 1, "Matematika 1", "MAT101" },
-                    { 2, "Osnove Programiranja", "INF101" },
-                    { 3, "Matematika 2", "MAT202" },
-                    { 4, "Osnove Organizacije", "ORG101" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Delovi",
-                columns: new[] { "DeoId", "Naziv", "PredmetId" },
-                values: new object[,]
-                {
-                    { 1, "Pismeni deo", 1 },
-                    { 2, "Usmeni deo", 1 },
-                    { 3, "Prvi kolokvijum", 1 },
-                    { 4, "Drugi kolokvijum", 1 },
-                    { 5, "Pismeni deo", 2 },
-                    { 6, "Usmeni deo", 2 },
-                    { 7, "Prvi kolokvijum", 2 },
-                    { 8, "Drugi kolokvijum", 2 },
-                    { 9, "Pismeni deo", 3 },
-                    { 10, "Usmeni deo", 3 },
-                    { 11, "Prvi kolokvijum", 3 },
-                    { 12, "Drugi kolokvijum", 3 },
-                    { 13, "Pismeni deo", 4 },
-                    { 14, "Usmeni deo", 4 },
-                    { 15, "Prvi kolokvijum", 4 },
-                    { 16, "Drugi kolokvijum", 4 }
+                    { 1, 6, "Matematika 1", "MAT101" },
+                    { 2, 8, "Osnove Programiranja", "INF101" },
+                    { 3, 6, "Matematika 2", "MAT202" },
+                    { 4, 5, "Osnove Organizacije", "ORG101" }
                 });
 
             migrationBuilder.InsertData(
@@ -201,11 +206,11 @@ namespace AcademicManagmentSystem.API.Migrations
                 columns: new[] { "PredavacId", "Email", "Ime", "KatedraId", "Password", "Prezime", "Username" },
                 values: new object[,]
                 {
-                    { 1, "petar.petrovic@example.com", "Petar", 1, "password123", "Petrovic", "ppetrovic" },
-                    { 2, "marko.markovic@example.com", "Marko", 2, "password123", "Markovic", "mmarkovic" },
-                    { 3, "zarko.zarkovic@example.com", "Zarko", 2, "password123", "Zarkovic", "zzarkovic" },
-                    { 4, "janko.jankovic@example.com", "Janko", 3, "password123", "Jankovic", "jjankovic" },
-                    { 5, "mirko.mirkovic@example.com", "Mirko", 1, "password123", "Mirkovic", "mmirkovic" }
+                    { 1, "petar.petrovic@example.com", "Petar", 1, "P@ssword_1", "Petrovic", "ppetrovic" },
+                    { 2, "marko.markovic@example.com", "Marko", 2, "P@ssword_1", "Markovic", "mmarkovic" },
+                    { 3, "zarko.zarkovic@example.com", "Zarko", 2, "P@ssword_1", "Zarkovic", "zzarkovic" },
+                    { 4, "janko.jankovic@example.com", "Janko", 3, "P@ssword_1", "Jankovic", "jjankovic" },
+                    { 5, "mirko.mirkovic@example.com", "Mirko", 1, "P@ssword_1", "Mirkovic", "mmirkovic" }
                 });
 
             migrationBuilder.InsertData(
@@ -227,6 +232,26 @@ namespace AcademicManagmentSystem.API.Migrations
                 column: "PredmetId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Delovi_StudentId",
+                table: "Delovi",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Delovi_TipId",
+                table: "Delovi",
+                column: "TipId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ocene_PredmetId",
+                table: "Ocene",
+                column: "PredmetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ocene_StudentId",
+                table: "Ocene",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Predavaci_KatedraId",
                 table: "Predavaci",
                 column: "KatedraId");
@@ -235,41 +260,34 @@ namespace AcademicManagmentSystem.API.Migrations
                 name: "IX_PredmetPredavaci_PredavacId",
                 table: "PredmetPredavaci",
                 column: "PredavacId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rezultati_DeoId",
-                table: "Rezultati",
-                column: "DeoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rezultati_StudentId",
-                table: "Rezultati",
-                column: "StudentId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Delovi");
+
+            migrationBuilder.DropTable(
+                name: "Ocene");
+
+            migrationBuilder.DropTable(
                 name: "PredmetPredavaci");
 
             migrationBuilder.DropTable(
-                name: "Rezultati");
-
-            migrationBuilder.DropTable(
-                name: "Predavaci");
-
-            migrationBuilder.DropTable(
-                name: "Delovi");
+                name: "Tip");
 
             migrationBuilder.DropTable(
                 name: "Studenti");
 
             migrationBuilder.DropTable(
-                name: "Katedre");
+                name: "Predavaci");
 
             migrationBuilder.DropTable(
                 name: "Predmeti");
+
+            migrationBuilder.DropTable(
+                name: "Katedre");
         }
     }
 }

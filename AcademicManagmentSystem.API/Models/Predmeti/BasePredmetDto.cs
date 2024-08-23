@@ -7,5 +7,7 @@ namespace AcademicManagmentSystem.API.Models.Predmeti
         [Required]
         public string Naziv { get; set; }
         public string Sifra { get; set; }
+        public int ESPB { get; set; }
+
     }
 }

@@ -9,6 +9,7 @@ namespace AcademicManagmentSystem.API.Data
         public string Prezime { get; set; }
         public string Index { get; set; }
 
-        public IList<Rezultat> Rezultati { get; set; }
+        public IList<Ocena> Ocene { get; set; } 
+        public IList<Deo> Delovi { get; set; }
     }
 }

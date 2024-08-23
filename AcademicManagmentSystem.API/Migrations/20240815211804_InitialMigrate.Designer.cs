@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademicManagmentSystem.API.Migrations
 {
     [DbContext(typeof(AcademicManagmentSystemDbContext))]
-    [Migration("20240628132639_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240815211804_InitialMigrate")]
+    partial class InitialMigrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -33,116 +33,40 @@ namespace AcademicManagmentSystem.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeoId"));
 
-                    b.Property<string>("Naziv")
+                    b.Property<double>("BrojPoena")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("MaxBrPoena")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Napomena")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Polozio")
+                        .HasColumnType("bit");
+
                     b.Property<int>("PredmetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipId")
                         .HasColumnType("int");
 
                     b.HasKey("DeoId");
 
                     b.HasIndex("PredmetId");
 
-                    b.ToTable("Delovi");
+                    b.HasIndex("StudentId");
 
-                    b.HasData(
-                        new
-                        {
-                            DeoId = 1,
-                            Naziv = "Pismeni deo",
-                            PredmetId = 1
-                        },
-                        new
-                        {
-                            DeoId = 2,
-                            Naziv = "Usmeni deo",
-                            PredmetId = 1
-                        },
-                        new
-                        {
-                            DeoId = 3,
-                            Naziv = "Prvi kolokvijum",
-                            PredmetId = 1
-                        },
-                        new
-                        {
-                            DeoId = 4,
-                            Naziv = "Drugi kolokvijum",
-                            PredmetId = 1
-                        },
-                        new
-                        {
-                            DeoId = 5,
-                            Naziv = "Pismeni deo",
-                            PredmetId = 2
-                        },
-                        new
-                        {
-                            DeoId = 6,
-                            Naziv = "Usmeni deo",
-                            PredmetId = 2
-                        },
-                        new
-                        {
-                            DeoId = 7,
-                            Naziv = "Prvi kolokvijum",
-                            PredmetId = 2
-                        },
-                        new
-                        {
-                            DeoId = 8,
-                            Naziv = "Drugi kolokvijum",
-                            PredmetId = 2
-                        },
-                        new
-                        {
-                            DeoId = 9,
-                            Naziv = "Pismeni deo",
-                            PredmetId = 3
-                        },
-                        new
-                        {
-                            DeoId = 10,
-                            Naziv = "Usmeni deo",
-                            PredmetId = 3
-                        },
-                        new
-                        {
-                            DeoId = 11,
-                            Naziv = "Prvi kolokvijum",
-                            PredmetId = 3
-                        },
-                        new
-                        {
-                            DeoId = 12,
-                            Naziv = "Drugi kolokvijum",
-                            PredmetId = 3
-                        },
-                        new
-                        {
-                            DeoId = 13,
-                            Naziv = "Pismeni deo",
-                            PredmetId = 4
-                        },
-                        new
-                        {
-                            DeoId = 14,
-                            Naziv = "Usmeni deo",
-                            PredmetId = 4
-                        },
-                        new
-                        {
-                            DeoId = 15,
-                            Naziv = "Prvi kolokvijum",
-                            PredmetId = 4
-                        },
-                        new
-                        {
-                            DeoId = 16,
-                            Naziv = "Drugi kolokvijum",
-                            PredmetId = 4
-                        });
+                    b.HasIndex("TipId");
+
+                    b.ToTable("Delovi");
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Katedra", b =>
@@ -177,6 +101,29 @@ namespace AcademicManagmentSystem.API.Migrations
                             KatedraID = 3,
                             Naziv = "Katedra 3"
                         });
+                });
+
+            modelBuilder.Entity("AcademicManagmentSystem.API.Data.Ocena", b =>
+                {
+                    b.Property<DateTime>("DatumPolaganja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PredmetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VrednostOcene")
+                        .HasColumnType("int");
+
+                    b.HasKey("DatumPolaganja");
+
+                    b.HasIndex("PredmetId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Ocene");
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Predavac", b =>
@@ -223,7 +170,7 @@ namespace AcademicManagmentSystem.API.Migrations
                             Email = "petar.petrovic@example.com",
                             Ime = "Petar",
                             KatedraId = 1,
-                            Password = "password123",
+                            Password = "P@ssword_1",
                             Prezime = "Petrovic",
                             Username = "ppetrovic"
                         },
@@ -233,7 +180,7 @@ namespace AcademicManagmentSystem.API.Migrations
                             Email = "marko.markovic@example.com",
                             Ime = "Marko",
                             KatedraId = 2,
-                            Password = "password123",
+                            Password = "P@ssword_1",
                             Prezime = "Markovic",
                             Username = "mmarkovic"
                         },
@@ -243,7 +190,7 @@ namespace AcademicManagmentSystem.API.Migrations
                             Email = "zarko.zarkovic@example.com",
                             Ime = "Zarko",
                             KatedraId = 2,
-                            Password = "password123",
+                            Password = "P@ssword_1",
                             Prezime = "Zarkovic",
                             Username = "zzarkovic"
                         },
@@ -253,7 +200,7 @@ namespace AcademicManagmentSystem.API.Migrations
                             Email = "janko.jankovic@example.com",
                             Ime = "Janko",
                             KatedraId = 3,
-                            Password = "password123",
+                            Password = "P@ssword_1",
                             Prezime = "Jankovic",
                             Username = "jjankovic"
                         },
@@ -263,7 +210,7 @@ namespace AcademicManagmentSystem.API.Migrations
                             Email = "mirko.mirkovic@example.com",
                             Ime = "Mirko",
                             KatedraId = 1,
-                            Password = "password123",
+                            Password = "P@ssword_1",
                             Prezime = "Mirkovic",
                             Username = "mmirkovic"
                         });
@@ -276,6 +223,9 @@ namespace AcademicManagmentSystem.API.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PredmetId"));
+
+                    b.Property<int>("ESPB")
+                        .HasColumnType("int");
 
                     b.Property<string>("Naziv")
                         .IsRequired()
@@ -293,24 +243,28 @@ namespace AcademicManagmentSystem.API.Migrations
                         new
                         {
                             PredmetId = 1,
+                            ESPB = 6,
                             Naziv = "Matematika 1",
                             Sifra = "MAT101"
                         },
                         new
                         {
                             PredmetId = 2,
+                            ESPB = 8,
                             Naziv = "Osnove Programiranja",
                             Sifra = "INF101"
                         },
                         new
                         {
                             PredmetId = 3,
+                            ESPB = 6,
                             Naziv = "Matematika 2",
                             Sifra = "MAT202"
                         },
                         new
                         {
                             PredmetId = 4,
+                            ESPB = 5,
                             Naziv = "Osnove Organizacije",
                             Sifra = "ORG101"
                         });
@@ -363,38 +317,6 @@ namespace AcademicManagmentSystem.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AcademicManagmentSystem.API.Data.Rezultat", b =>
-                {
-                    b.Property<int>("RezultatId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RezultatId"));
-
-                    b.Property<DateTime>("Datum")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DeoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Ocena")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Poeni")
-                        .HasColumnType("float");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RezultatId");
-
-                    b.HasIndex("DeoId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Rezultati");
-                });
-
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Student", b =>
                 {
                     b.Property<int>("StudentId")
@@ -420,6 +342,23 @@ namespace AcademicManagmentSystem.API.Migrations
                     b.ToTable("Studenti");
                 });
 
+            modelBuilder.Entity("AcademicManagmentSystem.API.Data.Tip", b =>
+                {
+                    b.Property<int>("TipId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipId"));
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipId");
+
+                    b.ToTable("Tip");
+                });
+
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Deo", b =>
                 {
                     b.HasOne("AcademicManagmentSystem.API.Data.Predmet", "Predmet")
@@ -428,7 +367,42 @@ namespace AcademicManagmentSystem.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AcademicManagmentSystem.API.Data.Student", "Student")
+                        .WithMany("Delovi")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademicManagmentSystem.API.Data.Tip", "Tip")
+                        .WithMany()
+                        .HasForeignKey("TipId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("Predmet");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Tip");
+                });
+
+            modelBuilder.Entity("AcademicManagmentSystem.API.Data.Ocena", b =>
+                {
+                    b.HasOne("AcademicManagmentSystem.API.Data.Predmet", "Predmet")
+                        .WithMany("Ocene")
+                        .HasForeignKey("PredmetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AcademicManagmentSystem.API.Data.Student", "Student")
+                        .WithMany("Ocene")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Predmet");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Predavac", b =>
@@ -461,30 +435,6 @@ namespace AcademicManagmentSystem.API.Migrations
                     b.Navigation("Predmet");
                 });
 
-            modelBuilder.Entity("AcademicManagmentSystem.API.Data.Rezultat", b =>
-                {
-                    b.HasOne("AcademicManagmentSystem.API.Data.Deo", "Deo")
-                        .WithMany("Rezultati")
-                        .HasForeignKey("DeoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AcademicManagmentSystem.API.Data.Student", "Student")
-                        .WithMany("Rezultati")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Deo");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("AcademicManagmentSystem.API.Data.Deo", b =>
-                {
-                    b.Navigation("Rezultati");
-                });
-
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Katedra", b =>
                 {
                     b.Navigation("Predavaci");
@@ -499,12 +449,16 @@ namespace AcademicManagmentSystem.API.Migrations
                 {
                     b.Navigation("Delovi");
 
+                    b.Navigation("Ocene");
+
                     b.Navigation("PredmetPredavaci");
                 });
 
             modelBuilder.Entity("AcademicManagmentSystem.API.Data.Student", b =>
                 {
-                    b.Navigation("Rezultati");
+                    b.Navigation("Delovi");
+
+                    b.Navigation("Ocene");
                 });
 #pragma warning restore 612, 618
         }

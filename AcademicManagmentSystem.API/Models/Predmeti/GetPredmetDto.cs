@@ -17,7 +17,7 @@ namespace AcademicManagmentSystem.API.Models.Predmeti
 
         public IList<GetPredmetPredavacDto> PredmetPredavaci { get; set; }
 
-        public IList<GetDeoDto> Delovi { get; set; }
+        public IList<Tip> Delovi { get; set; }
 
     }
     

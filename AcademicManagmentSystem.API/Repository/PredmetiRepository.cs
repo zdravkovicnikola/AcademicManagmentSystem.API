@@ -22,13 +22,14 @@ namespace AcademicManagmentSystem.API.Repository
                                .ThenInclude(pr => pr.Katedra)
                                 .FirstOrDefaultAsync(p => p.PredmetId == id);
         }
-        public async Task<Predmet> GetDetailsDeo(int id)
+
+        public async Task<Predmet> GetAsyncByPass(string sifra)
         {
+            if (string.IsNullOrWhiteSpace(sifra))
+                return null;
+
             return await _context.Predmeti
-                      .Include(p => p.Delovi)
-                        .ThenInclude(pr => pr.Rezultati)
-                            .ThenInclude(ps => ps.Student)
-                                .FirstOrDefaultAsync(p => p.PredmetId == id); ;
+                .FirstOrDefaultAsync(p => p.Sifra == sifra);
         }
     }
 }
