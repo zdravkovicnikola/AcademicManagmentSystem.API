@@ -1,0 +1,177 @@
+2024-08-18 14:46:09.741 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 14:46:09.800 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 14:46:09.803 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 14:46:09.805 +02:00 [INF] Hosting environment: Development
+2024-08-18 14:46:09.807 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 14:46:34.977 +02:00 [INF] HTTP GET /api/Delovi/results responded 200 in 7402.3123 ms
+2024-08-18 14:54:12.677 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 14:54:12.732 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 14:54:12.736 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 14:54:12.738 +02:00 [INF] Hosting environment: Development
+2024-08-18 14:54:12.739 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 14:54:45.332 +02:00 [INF] HTTP GET /api/Delovi/results responded 200 in 5760.5691 ms
+2024-08-18 15:36:44.136 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 15:36:44.196 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 15:36:44.199 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 15:36:44.201 +02:00 [INF] Hosting environment: Development
+2024-08-18 15:36:44.203 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 16:01:48.401 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 16:01:48.468 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 16:01:48.472 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 16:01:48.474 +02:00 [INF] Hosting environment: Development
+2024-08-18 16:01:48.475 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 16:44:45.336 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 16:44:45.489 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 16:44:45.494 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 16:44:45.500 +02:00 [INF] Hosting environment: Development
+2024-08-18 16:44:45.501 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 16:45:30.288 +02:00 [INF] HTTP GET /api/Delovi/results responded 200 in 3843.1671 ms
+2024-08-18 16:45:59.602 +02:00 [INF] HTTP GET /api/Delovi/resultsForStudent responded 200 in 3055.1323 ms
+2024-08-18 16:47:04.464 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 16:47:04.562 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 16:47:04.568 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 16:47:04.570 +02:00 [INF] Hosting environment: Development
+2024-08-18 16:47:04.572 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 16:47:18.372 +02:00 [INF] HTTP GET /api/Delovi/resultsForStudent responded 400 in 618.3629 ms
+2024-08-18 16:47:38.301 +02:00 [ERR] HTTP GET /api/Delovi/resultsForStudent responded 500 in 7978.1007 ms
+System.Exception: Predmet nije pronađen.
+   at AcademicManagmentSystem.API.Services.Implementation.DeloviService.GetAllResultsForSubjectAndStudent(String sifraPredmeta, String indeks) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Services\Implementation\DeloviService.cs:line 30
+   at AcademicManagmentSystem.API.Controllers.DeloviController.GetAllResultsForStudent(String sifraPredmeta, String indeks) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Controllers\DeloviController.cs:line 59
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2024-08-18 16:47:38.359 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Exception: Predmet nije pronađen.
+   at AcademicManagmentSystem.API.Services.Implementation.DeloviService.GetAllResultsForSubjectAndStudent(String sifraPredmeta, String indeks) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Services\Implementation\DeloviService.cs:line 30
+   at AcademicManagmentSystem.API.Controllers.DeloviController.GetAllResultsForStudent(String sifraPredmeta, String indeks) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Controllers\DeloviController.cs:line 59
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-08-18 16:58:28.095 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 16:58:28.885 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 16:58:29.014 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 16:58:29.021 +02:00 [INF] Hosting environment: Development
+2024-08-18 16:58:29.049 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 16:59:09.197 +02:00 [INF] HTTP GET /api/Delovi/resultsForStudent responded 400 in 7402.3110 ms
+2024-08-18 16:59:24.614 +02:00 [INF] HTTP GET /api/Delovi/resultsForStudent responded 400 in 254.6716 ms
+2024-08-18 17:01:48.718 +02:00 [INF] HTTP GET /api/Delovi/resultsForStudent responded 200 in 473.5762 ms
+2024-08-18 17:15:09.640 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 17:15:09.789 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 17:15:09.796 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 17:15:09.798 +02:00 [INF] Hosting environment: Development
+2024-08-18 17:15:09.800 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 17:15:26.712 +02:00 [INF] HTTP DELETE /api/Delovi/1009 responded 204 in 5196.7526 ms
+2024-08-18 18:34:08.548 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 18:34:08.700 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 18:34:08.706 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 18:34:08.708 +02:00 [INF] Hosting environment: Development
+2024-08-18 18:34:08.729 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 18:34:30.501 +02:00 [INF] HTTP GET /api/Delovi/resultsForStudent responded 200 in 4384.6988 ms
+2024-08-18 18:43:43.963 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 18:43:44.077 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 18:43:44.082 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 18:43:44.084 +02:00 [INF] Hosting environment: Development
+2024-08-18 18:43:44.086 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 18:44:07.479 +02:00 [INF] HTTP GET /api/Delovi/results responded 200 in 4978.2335 ms
+2024-08-18 18:46:48.178 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 18:46:48.282 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 18:46:48.293 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 18:46:48.296 +02:00 [INF] Hosting environment: Development
+2024-08-18 18:46:48.297 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 18:47:13.072 +02:00 [INF] HTTP GET /api/Delovi/results responded 200 in 3874.0207 ms
+2024-08-18 18:54:12.635 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 18:54:12.760 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 18:54:12.767 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 18:54:12.769 +02:00 [INF] Hosting environment: Development
+2024-08-18 18:54:12.770 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 18:54:29.453 +02:00 [INF] HTTP GET /api/Predmeti responded 200 in 4007.4776 ms
+2024-08-18 18:54:47.069 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 811.6838 ms
+2024-08-18 19:02:25.446 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 19:02:25.627 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 19:02:25.659 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 19:02:25.663 +02:00 [INF] Hosting environment: Development
+2024-08-18 19:02:25.664 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 19:02:37.695 +02:00 [INF] HTTP GET /api/Predmeti responded 200 in 3749.3087 ms
+2024-08-18 19:02:50.231 +02:00 [INF] HTTP GET /api/Predmeti/2 responded 200 in 880.0961 ms
+2024-08-18 20:42:19.226 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 20:42:19.942 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 20:42:20.560 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 20:42:20.562 +02:00 [INF] Hosting environment: Development
+2024-08-18 20:42:20.571 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 20:56:07.460 +02:00 [INF] HTTP GET /api/Predmeti responded 200 in 5778.6779 ms
+2024-08-18 20:56:25.877 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 726.9070 ms
+2024-08-18 21:00:28.244 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 21:00:28.365 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 21:00:28.374 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 21:00:28.375 +02:00 [INF] Hosting environment: Development
+2024-08-18 21:00:28.377 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 21:00:42.141 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 3447.8577 ms
+2024-08-18 21:02:20.126 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 21:02:20.240 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 21:02:20.486 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 21:02:20.489 +02:00 [INF] Hosting environment: Development
+2024-08-18 21:02:20.491 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 21:04:04.602 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 4235.7351 ms
+2024-08-18 21:05:17.258 +02:00 [INF] HTTP GET /api/Predmeti/2 responded 200 in 83.7225 ms
+2024-08-18 21:19:33.494 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 21:19:34.313 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 21:19:34.867 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 21:19:34.870 +02:00 [INF] Hosting environment: Development
+2024-08-18 21:19:34.871 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 21:20:16.637 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 9205.4444 ms
+2024-08-18 21:51:48.535 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 21:51:48.721 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 21:51:48.727 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 21:51:48.729 +02:00 [INF] Hosting environment: Development
+2024-08-18 21:51:48.730 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 21:52:05.323 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 6650.1743 ms
+2024-08-18 21:52:43.382 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 21:52:43.492 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 21:52:43.498 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 21:52:43.501 +02:00 [INF] Hosting environment: Development
+2024-08-18 21:52:43.502 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 21:53:25.370 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 4009.5701 ms
+2024-08-18 22:01:24.685 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 22:01:24.823 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 22:01:24.975 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 22:01:24.983 +02:00 [INF] Hosting environment: Development
+2024-08-18 22:01:24.986 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 22:01:40.192 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 7033.0908 ms
+2024-08-18 22:05:24.605 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 22:05:25.123 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 22:05:25.191 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 22:05:25.197 +02:00 [INF] Hosting environment: Development
+2024-08-18 22:05:25.198 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 22:05:40.013 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 4043.5487 ms
+2024-08-18 22:06:17.119 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 22:06:17.286 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 22:06:17.291 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 22:06:17.293 +02:00 [INF] Hosting environment: Development
+2024-08-18 22:06:17.294 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 22:06:29.864 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 3986.5775 ms
+2024-08-18 22:08:33.297 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-18 22:08:33.399 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-18 22:08:33.405 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-18 22:08:33.407 +02:00 [INF] Hosting environment: Development
+2024-08-18 22:08:33.408 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-18 22:08:47.669 +02:00 [INF] HTTP GET /api/Predmeti/1 responded 200 in 5419.7751 ms

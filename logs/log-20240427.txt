@@ -1,0 +1,6 @@
+2024-04-27 12:56:15.510 +02:00 [INF] Now listening on: https://localhost:7073
+2024-04-27 12:56:15.558 +02:00 [INF] Now listening on: http://localhost:5008
+2024-04-27 12:56:15.562 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-27 12:56:15.565 +02:00 [INF] Hosting environment: Development
+2024-04-27 12:56:15.567 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-04-27 12:58:13.581 +02:00 [INF] Application is shutting down...

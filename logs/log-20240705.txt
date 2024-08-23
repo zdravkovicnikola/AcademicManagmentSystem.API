@@ -1,0 +1,6 @@
+2024-07-05 18:00:32.575 +02:00 [INF] Now listening on: https://localhost:7073
+2024-07-05 18:00:32.623 +02:00 [INF] Now listening on: http://localhost:5008
+2024-07-05 18:00:32.626 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-07-05 18:00:32.628 +02:00 [INF] Hosting environment: Development
+2024-07-05 18:00:32.630 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-07-05 18:00:48.020 +02:00 [INF] HTTP GET /api/Delovi responded 200 in 6573.2163 ms

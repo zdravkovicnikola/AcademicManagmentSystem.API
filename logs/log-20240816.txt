@@ -1,0 +1,421 @@
+2024-08-16 00:05:46.569 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 00:05:46.679 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 00:05:46.772 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 00:05:46.776 +02:00 [INF] Hosting environment: Development
+2024-08-16 00:05:46.779 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 00:06:52.723 +02:00 [INF] UploadUsmeni method called
+2024-08-16 00:06:52.727 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 00:06:58.383 +02:00 [INF] CSV data loaded
+2024-08-16 00:06:58.433 +02:00 [INF] Processing student 0942/2020
+2024-08-16 00:07:02.993 +02:00 [INF] Student added
+2024-08-16 00:07:03.286 +02:00 [ERR] An exception occurred in the database while saving changes for context type 'AcademicManagmentSystem.API.Data.AcademicManagmentSystemDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Napomena', table 'AcademicManagmentSystemAPIDb.dbo.Delovi'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:c49b1836-29d2-4463-9fb5-a2310514d5d7
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Napomena', table 'AcademicManagmentSystemAPIDb.dbo.Delovi'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:c49b1836-29d2-4463-9fb5-a2310514d5d7
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2024-08-16 00:07:03.651 +02:00 [ERR] HTTP POST /api/Delovi/upload-usmeni responded 500 in 11800.8168 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Napomena', table 'AcademicManagmentSystemAPIDb.dbo.Delovi'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:c49b1836-29d2-4463-9fb5-a2310514d5d7
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AcademicManagmentSystem.API.Repository.GenericRepository`1.AddAsync(T entity) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Repository\GenericRepository.cs:line 21
+   at AcademicManagmentSystem.API.Controllers.DeloviController.UploadUsmeni(IFormFile file) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Controllers\DeloviController.cs:line 139
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2024-08-16 00:07:03.743 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'Napomena', table 'AcademicManagmentSystemAPIDb.dbo.Delovi'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:c49b1836-29d2-4463-9fb5-a2310514d5d7
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AcademicManagmentSystem.API.Repository.GenericRepository`1.AddAsync(T entity) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Repository\GenericRepository.cs:line 21
+   at AcademicManagmentSystem.API.Controllers.DeloviController.UploadUsmeni(IFormFile file) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Controllers\DeloviController.cs:line 139
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-08-16 00:09:36.149 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 00:09:36.336 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 00:09:36.343 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 00:09:36.345 +02:00 [INF] Hosting environment: Development
+2024-08-16 00:09:36.347 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 00:09:56.485 +02:00 [INF] UploadUsmeni method called
+2024-08-16 00:09:56.491 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 00:09:56.548 +02:00 [INF] CSV data loaded
+2024-08-16 00:09:56.551 +02:00 [INF] Processing student 0942/2020
+2024-08-16 00:11:24.966 +02:00 [ERR] HTTP POST /api/Delovi/upload-usmeni responded 500 in 88998.8951 ms
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at AcademicManagmentSystem.API.Controllers.DeloviController.UploadUsmeni(IFormFile file) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Controllers\DeloviController.cs:line 139
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2024-08-16 00:11:25.032 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at AcademicManagmentSystem.API.Controllers.DeloviController.UploadUsmeni(IFormFile file) in C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API\Controllers\DeloviController.cs:line 139
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-08-16 00:11:53.951 +02:00 [INF] UploadUsmeni method called
+2024-08-16 00:11:56.556 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 00:12:01.120 +02:00 [INF] CSV data loaded
+2024-08-16 00:12:07.203 +02:00 [INF] Processing student 0942/2020
+2024-08-16 00:15:35.010 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 00:15:35.237 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 00:15:35.877 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 00:15:35.896 +02:00 [INF] Hosting environment: Development
+2024-08-16 00:15:35.918 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 00:16:02.002 +02:00 [INF] UploadUsmeni method called
+2024-08-16 00:16:03.294 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 00:16:04.637 +02:00 [INF] CSV data loaded
+2024-08-16 00:16:07.827 +02:00 [INF] Processing student 0942/2020
+2024-08-16 00:24:52.136 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 00:24:52.321 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 00:24:52.569 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 00:24:53.612 +02:00 [INF] Hosting environment: Development
+2024-08-16 00:24:53.615 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 00:25:14.007 +02:00 [INF] UploadUsmeni method called
+2024-08-16 00:25:15.385 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 00:25:22.113 +02:00 [INF] CSV data loaded
+2024-08-16 00:25:29.254 +02:00 [INF] Processing student 0942/2020
+2024-08-16 00:26:02.046 +02:00 [INF] Student added
+2024-08-16 00:26:14.142 +02:00 [INF] Usmeni added
+2024-08-16 00:26:18.839 +02:00 [INF] Deo updated
+2024-08-16 00:26:19.737 +02:00 [INF] Student updated
+2024-08-16 00:26:29.138 +02:00 [INF] Processing student 0001/2023
+2024-08-16 00:26:37.071 +02:00 [INF] Student added
+2024-08-16 00:26:42.283 +02:00 [INF] Usmeni added
+2024-08-16 00:26:45.712 +02:00 [INF] Deo updated
+2024-08-16 00:26:47.146 +02:00 [INF] Student updated
+2024-08-16 00:26:52.792 +02:00 [INF] HTTP POST /api/Delovi/upload-usmeni responded 200 in 106078.0551 ms
+2024-08-16 00:28:26.419 +02:00 [INF] UploadUsmeni method called
+2024-08-16 00:28:26.422 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 00:28:26.429 +02:00 [INF] CSV data loaded
+2024-08-16 00:28:26.430 +02:00 [INF] Processing student 0942/2020
+2024-08-16 00:45:12.479 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 00:45:12.950 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 00:45:13.095 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 00:45:13.457 +02:00 [INF] Hosting environment: Development
+2024-08-16 00:45:13.547 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 00:46:28.346 +02:00 [INF] UploadUsmeni method called
+2024-08-16 00:46:29.141 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 00:46:30.636 +02:00 [INF] CSV data loaded
+2024-08-16 00:46:34.489 +02:00 [INF] Processing student 0942/2020
+2024-08-16 00:46:42.603 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 00:48:02.034 +02:00 [INF] Usmeni added
+2024-08-16 00:48:02.053 +02:00 [INF] Deo updated
+2024-08-16 00:48:02.060 +02:00 [INF] Student updated
+2024-08-16 00:48:02.062 +02:00 [INF] Processing student 0001/2023
+2024-08-16 00:48:02.089 +02:00 [INF] Usmeni added
+2024-08-16 00:48:02.096 +02:00 [INF] Deo updated
+2024-08-16 00:48:02.100 +02:00 [INF] Student updated
+2024-08-16 00:48:02.121 +02:00 [INF] HTTP POST /api/Delovi/upload-usmeni responded 200 in 126324.8923 ms
+2024-08-16 01:09:21.120 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 01:09:21.226 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 01:09:21.233 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 01:09:21.236 +02:00 [INF] Hosting environment: Development
+2024-08-16 01:09:21.238 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 01:09:40.680 +02:00 [ERR] HTTP POST /api/Delovi/upload-usmeni responded 500 in 611.9987 ms
+System.InvalidOperationException: Unable to resolve service for type 'AcademicManagmentSystem.API.Contracts.ITipRepository' while attempting to activate 'AcademicManagmentSystem.API.Controllers.DeloviController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2024-08-16 01:09:40.726 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'AcademicManagmentSystem.API.Contracts.ITipRepository' while attempting to activate 'AcademicManagmentSystem.API.Controllers.DeloviController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-08-16 01:11:07.139 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 01:11:07.882 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 01:11:08.102 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 01:11:08.105 +02:00 [INF] Hosting environment: Development
+2024-08-16 01:11:08.106 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 01:11:32.340 +02:00 [INF] UploadUsmeni method called
+2024-08-16 01:11:34.143 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 01:11:35.703 +02:00 [INF] CSV data loaded
+2024-08-16 01:11:38.716 +02:00 [INF] Processing student 0942/2020
+2024-08-16 01:11:45.983 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 01:12:40.344 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 01:12:40.445 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 01:12:41.412 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 01:12:41.416 +02:00 [INF] Hosting environment: Development
+2024-08-16 01:12:41.417 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 01:12:56.531 +02:00 [INF] UploadUsmeni method called
+2024-08-16 01:12:56.535 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 01:12:56.614 +02:00 [INF] CSV data loaded
+2024-08-16 01:12:56.640 +02:00 [INF] Processing student 0942/2020
+2024-08-16 01:12:59.306 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 01:13:00.762 +02:00 [INF] Usmeni added
+2024-08-16 01:13:00.801 +02:00 [INF] Deo updated
+2024-08-16 01:13:00.818 +02:00 [INF] Student updated
+2024-08-16 01:13:00.820 +02:00 [INF] Processing student 0001/2023
+2024-08-16 01:13:00.855 +02:00 [INF] Usmeni added
+2024-08-16 01:13:00.865 +02:00 [INF] Deo updated
+2024-08-16 01:13:00.871 +02:00 [INF] Student updated
+2024-08-16 01:13:00.894 +02:00 [INF] HTTP POST /api/Delovi/upload-usmeni responded 200 in 4971.1271 ms
+2024-08-16 01:13:29.090 +02:00 [INF] UploadUsmeni method called
+2024-08-16 01:13:29.092 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 01:13:29.097 +02:00 [INF] CSV data loaded
+2024-08-16 01:13:29.098 +02:00 [INF] Processing student 0942/2020
+2024-08-16 12:14:15.596 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 12:14:15.675 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 12:14:15.680 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 12:14:15.687 +02:00 [INF] Hosting environment: Development
+2024-08-16 12:14:15.688 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 12:14:35.292 +02:00 [INF] UploadUsmeni method called
+2024-08-16 12:14:35.299 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 12:14:35.812 +02:00 [INF] CSV data loaded
+2024-08-16 12:14:35.814 +02:00 [INF] Processing student 0942/2020
+2024-08-16 12:14:47.404 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 12:44:00.776 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 12:44:02.231 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 12:44:02.390 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 12:44:02.392 +02:00 [INF] Hosting environment: Development
+2024-08-16 12:44:02.539 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 12:44:25.552 +02:00 [INF] UploadUsmeni method called
+2024-08-16 12:44:25.558 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 12:44:25.624 +02:00 [INF] CSV data loaded
+2024-08-16 12:44:25.626 +02:00 [INF] Processing student 0942/2020
+2024-08-16 12:44:36.953 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 12:55:26.465 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 12:55:26.920 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 12:55:27.974 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 12:55:27.976 +02:00 [INF] Hosting environment: Development
+2024-08-16 12:55:27.977 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 12:55:47.709 +02:00 [INF] UploadUsmeni method called
+2024-08-16 12:55:47.715 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 12:55:47.819 +02:00 [INF] CSV data loaded
+2024-08-16 12:55:47.821 +02:00 [INF] Processing student 0942/2020
+2024-08-16 12:56:03.989 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 13:04:23.665 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 13:04:23.766 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 13:04:23.815 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 13:04:23.825 +02:00 [INF] Hosting environment: Development
+2024-08-16 13:04:23.826 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 13:08:57.130 +02:00 [INF] UploadUsmeni method called
+2024-08-16 13:08:57.136 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_usmeni_deo_ispita.csv
+2024-08-16 13:08:57.226 +02:00 [INF] CSV data loaded
+2024-08-16 13:08:57.229 +02:00 [INF] Processing student 0942/2020
+2024-08-16 13:09:00.662 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 13:09:02.412 +02:00 [INF] Student added
+2024-08-16 13:09:02.668 +02:00 [INF] Usmeni added
+2024-08-16 13:09:02.691 +02:00 [INF] Deo updated
+2024-08-16 13:09:02.701 +02:00 [INF] Student updated
+2024-08-16 13:09:02.703 +02:00 [INF] Processing student 0001/2023
+2024-08-16 13:09:02.765 +02:00 [INF] Student added
+2024-08-16 13:09:02.786 +02:00 [INF] Usmeni added
+2024-08-16 13:09:02.808 +02:00 [INF] Deo updated
+2024-08-16 13:09:02.817 +02:00 [INF] Student updated
+2024-08-16 13:09:02.846 +02:00 [INF] HTTP POST /api/Delovi/upload-usmeni responded 200 in 6549.1145 ms
+2024-08-16 13:11:03.016 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 13:11:03.312 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 13:11:04.129 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 13:11:04.174 +02:00 [INF] Hosting environment: Development
+2024-08-16 13:11:04.176 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 13:26:08.882 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 13:26:09.556 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 13:26:09.664 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 13:26:09.670 +02:00 [INF] Hosting environment: Development
+2024-08-16 13:26:09.672 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 13:26:56.617 +02:00 [INF] UploadPrakticni method called
+2024-08-16 13:26:56.632 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_datoteke_poeni_prakticni_deo.csv
+2024-08-16 13:26:56.782 +02:00 [INF] CSV data loaded
+2024-08-16 13:26:56.783 +02:00 [INF] Processing student 0942/2020
+2024-08-16 13:27:00.401 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-08-16 13:27:02.996 +02:00 [INF] Usmeni added
+2024-08-16 13:27:03.006 +02:00 [INF] Processing student 0888/2022
+2024-08-16 13:27:03.322 +02:00 [INF] Student added
+2024-08-16 13:27:03.352 +02:00 [INF] Usmeni added
+2024-08-16 13:27:03.434 +02:00 [INF] Deo updated
+2024-08-16 13:27:03.453 +02:00 [INF] Student updated
+2024-08-16 13:27:03.462 +02:00 [INF] Processing student 0001/2023
+2024-08-16 13:27:03.860 +02:00 [INF] Usmeni added
+2024-08-16 13:27:03.897 +02:00 [INF] Deo updated
+2024-08-16 13:27:04.025 +02:00 [INF] Student updated
+2024-08-16 13:27:04.099 +02:00 [INF] HTTP POST /api/Delovi/upload-prakticni responded 200 in 8733.8864 ms
+2024-08-16 13:32:04.285 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-16 13:32:04.368 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-16 13:32:04.373 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-16 13:32:04.375 +02:00 [INF] Hosting environment: Development
+2024-08-16 13:32:04.376 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-16 13:32:35.841 +02:00 [INF] UploadPrakticni method called
+2024-08-16 13:32:36.114 +02:00 [INF] Saving file to C:\Users\Nikola\AppData\Local\Temp\primer_datoteke_poeni_prakticni_deo.csv
+2024-08-16 13:32:36.199 +02:00 [INF] CSV data loaded
+2024-08-16 13:32:36.201 +02:00 [INF] Processing student 0942/2020
+2024-08-16 13:32:41.488 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.

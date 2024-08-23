@@ -1,0 +1,76 @@
+2024-08-22 00:31:10.951 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 00:31:11.161 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 00:31:11.584 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 00:31:11.589 +02:00 [INF] Hosting environment: Development
+2024-08-22 00:31:11.590 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 00:36:30.123 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 00:36:30.607 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 00:36:31.919 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 00:36:31.937 +02:00 [INF] Hosting environment: Development
+2024-08-22 00:36:31.958 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:01:51.252 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 01:01:53.419 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 01:01:53.441 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 01:01:53.444 +02:00 [INF] Hosting environment: Development
+2024-08-22 01:01:53.446 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:02:34.421 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 7453.5920 ms
+2024-08-22 01:09:04.770 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 315.9443 ms
+2024-08-22 01:24:08.523 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 01:24:08.614 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 01:24:08.619 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 01:24:08.621 +02:00 [INF] Hosting environment: Development
+2024-08-22 01:24:08.622 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:25:25.086 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 41887.6124 ms
+2024-08-22 01:26:20.665 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 01:26:20.767 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 01:26:20.772 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 01:26:20.808 +02:00 [INF] Hosting environment: Development
+2024-08-22 01:26:20.811 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:26:41.427 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 8580.4051 ms
+2024-08-22 01:39:02.067 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 01:39:02.182 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 01:39:02.191 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 01:39:02.193 +02:00 [INF] Hosting environment: Development
+2024-08-22 01:39:02.196 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:40:07.810 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 6315.5777 ms
+2024-08-22 01:41:13.100 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 101.5718 ms
+2024-08-22 01:41:27.592 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 178.2793 ms
+2024-08-22 01:41:52.319 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 15.4344 ms
+2024-08-22 01:43:48.433 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 01:43:48.532 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 01:43:48.542 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 01:43:48.551 +02:00 [INF] Hosting environment: Development
+2024-08-22 01:43:48.553 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:44:23.549 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 2778.0697 ms
+2024-08-22 01:44:34.661 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 55.9465 ms
+2024-08-22 01:44:36.305 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 115.7673 ms
+2024-08-22 01:45:48.378 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 01:45:48.427 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 01:45:48.432 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 01:45:48.434 +02:00 [INF] Hosting environment: Development
+2024-08-22 01:45:48.436 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:46:14.710 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 4018.6222 ms
+2024-08-22 01:46:25.877 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 55.4228 ms
+2024-08-22 01:47:20.278 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 01:47:20.404 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 01:47:20.411 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 01:47:20.413 +02:00 [INF] Hosting environment: Development
+2024-08-22 01:47:20.415 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 01:47:49.558 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 4375.8282 ms
+2024-08-22 01:48:11.481 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 102.2480 ms
+2024-08-22 01:48:26.063 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 164.3811 ms
+2024-08-22 12:10:27.617 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 12:10:27.722 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 12:10:27.727 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 12:10:27.728 +02:00 [INF] Hosting environment: Development
+2024-08-22 12:10:27.730 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 12:12:37.988 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 8331.3210 ms
+2024-08-22 12:13:06.405 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 235.9441 ms
+2024-08-22 22:18:51.259 +02:00 [INF] Now listening on: https://localhost:7073
+2024-08-22 22:18:51.371 +02:00 [INF] Now listening on: http://localhost:5008
+2024-08-22 22:18:51.377 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-08-22 22:18:51.379 +02:00 [INF] Hosting environment: Development
+2024-08-22 22:18:51.381 +02:00 [INF] Content root path: C:\Users\Nikola\source\repos\AcademicManagmentSystem.API\AcademicManagmentSystem.API
+2024-08-22 22:19:44.908 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 6788.7502 ms
+2024-08-22 22:20:28.344 +02:00 [INF] HTTP GET /api/Delovi/results/students responded 200 in 149.2566 ms
+2024-08-22 22:22:44.781 +02:00 [INF] HTTP GET /api/Delovi/results responded 200 in 405.7182 ms
