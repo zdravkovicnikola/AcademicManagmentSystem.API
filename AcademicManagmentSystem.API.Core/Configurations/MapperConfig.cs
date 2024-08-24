@@ -6,12 +6,11 @@ using AcademicManagmentSystem.API.Models.Predavaci;
 using AcademicManagmentSystem.API.Models.Predmeti;
 using AcademicManagmentSystem.API.Models.Studenti;
 using AutoMapper;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using Deo = AcademicManagmentSystem.API.Data.Deo;
 
 namespace AcademicManagmentSystem.API.Configurations
 {
-    public class MapperConfig :Profile
+    public class MapperConfig : Profile
     {
         public MapperConfig()
         {

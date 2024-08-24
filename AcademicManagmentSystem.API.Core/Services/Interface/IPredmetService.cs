@@ -1,6 +1,5 @@
 ﻿using AcademicManagmentSystem.API.Data;
 using AcademicManagmentSystem.API.Models.Predmeti;
-using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 
 namespace AcademicManagmentSystem.API.Services.Interface
 {

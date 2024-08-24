@@ -1,18 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Contracts;
-using AutoMapper;
-using AcademicManagmentSystem.API.Models.Delovi;
-using Deo = AcademicManagmentSystem.API.Data.Deo;
-using AcademicManagmentSystem.API.Models;
-using CsvHelper.Configuration;
-using System.Globalization;
-using CsvHelper;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.ComponentModel.DataAnnotations;
 using AcademicManagmentSystem.API.Services.Interface;
-using AcademicManagmentSystem.API.Repository;
 
 namespace AcademicManagmentSystem.API.Controllers
 {

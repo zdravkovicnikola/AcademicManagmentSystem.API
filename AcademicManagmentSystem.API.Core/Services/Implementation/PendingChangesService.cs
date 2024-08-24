@@ -6,6 +6,7 @@ using AcademicManagmentSystem.API.Models.Studenti;
 using AcademicManagmentSystem.API.Repository;
 using AcademicManagmentSystem.API.Services.Interface;
 using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AcademicManagmentSystem.API.Services.Implementation
 {
