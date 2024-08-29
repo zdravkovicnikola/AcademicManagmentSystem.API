@@ -1,4 +1,4 @@
-﻿namespace AcademicManagmentSystem.API.Models.Studenti
+﻿namespace AcademicManagmentSystem.API.Core.Models.Studenti
 {
     public class GetStudentDto
     {

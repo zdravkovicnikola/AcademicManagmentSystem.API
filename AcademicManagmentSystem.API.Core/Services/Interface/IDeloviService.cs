@@ -1,8 +1,8 @@
 ﻿using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Delovi;
-using AcademicManagmentSystem.API.Models.Studenti;
+using AcademicManagmentSystem.API.Core.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Studenti;
 
-namespace AcademicManagmentSystem.API.Services.Interface
+namespace AcademicManagmentSystem.API.Core.Services.Interface
 {
     public interface IDeloviService
     {

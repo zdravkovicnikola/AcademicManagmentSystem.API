@@ -1,6 +1,6 @@
-﻿using AcademicManagmentSystem.API.Models;
+﻿using AcademicManagmentSystem.API.Core.Models;
 
-namespace AcademicManagmentSystem.API.Services.Interface
+namespace AcademicManagmentSystem.API.Core.Services.Interface
 {
     public interface ICsvService
     {

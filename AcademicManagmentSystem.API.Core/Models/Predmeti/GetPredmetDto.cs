@@ -1,9 +1,9 @@
 ﻿using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Delovi;
-using AcademicManagmentSystem.API.Models.Predavaci;
+using AcademicManagmentSystem.API.Core.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Predavaci;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AcademicManagmentSystem.API.Models.Predmeti
+namespace AcademicManagmentSystem.API.Core.Models.Predmeti
 {
     public class GetPredmetDto : BasePredmetDto
     {

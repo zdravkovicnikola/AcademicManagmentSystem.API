@@ -1,11 +1,11 @@
 ﻿using AcademicManagmentSystem.API.Contracts;
 using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Predmeti;
-using AcademicManagmentSystem.API.Services.Interface;
+using AcademicManagmentSystem.API.Core.Models.Predmeti;
+using AcademicManagmentSystem.API.Core.Services.Interface;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace AcademicManagmentSystem.API.Services.Implementation
+namespace AcademicManagmentSystem.API.Core.Services.Implementation
 {
     public class PredmetService : IPredmetService
     {

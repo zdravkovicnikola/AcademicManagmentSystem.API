@@ -1,6 +1,6 @@
 ﻿using AcademicManagmentSystem.API.Contracts;
 using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models;
+using AcademicManagmentSystem.API.Core.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 

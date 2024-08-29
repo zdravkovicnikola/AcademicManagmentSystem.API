@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using AcademicManagmentSystem.API.Services.Interface;
+using AcademicManagmentSystem.API.Core.Services.Interface;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
@@ -236,17 +236,55 @@ namespace AcademicManagmentSystem.API.Controllers
             return Ok(await _pendingChangesService.ReturnListPendingStudents());
         }
 
-        [HttpPost("commit-pending")]
-        public async Task<IActionResult> CommitPendingChanges()
+        [HttpGet("pending/all")]
+        public IActionResult GetAllPendingChanges()
         {
-            var result = await _pendingChangesService.CommitPendingChanges();
+            var pendingChanges = _pendingChangesService.GetAllPendingChanges();
+            return Ok(pendingChanges);
+        }
 
-            if (result == false)
+        [HttpDelete("remove-pending/{guid}")]
+        public async Task<IActionResult> RemovePendingChanges(Guid guid)
+        {
+            var result = await _pendingChangesService.RemovePendingChanges(guid);
+
+            if (!result)
             {
-                return BadRequest("Nije bilo pending promena za upis u bazu.");
+                return BadRequest("Nema pending promena za uklanjanje za dati GUID.");
+            }
+
+            return Ok("Pending promene su uspešno uklonjene.");
+        }
+
+
+        [HttpPost("commit-pending/{guid}")]
+        public async Task<IActionResult> CommitPendingChanges(Guid guid)
+        {
+            var result = await _pendingChangesService.CommitPendingChanges(guid);
+
+            if (!result)
+            {
+                return BadRequest("Nema pending promena za upis u bazu za dati GUID.");
             }
 
             return Ok("Pending promene su uspešno upisane u bazu.");
+        }
+        [HttpGet("rolback/all")]
+        public IActionResult GetAllRollbacks()
+        {
+            var pendingChanges = _pendingChangesService.GetAllRollbacks();
+            return Ok(pendingChanges);
+        }
+
+        [HttpPost("rollback-pending/{guid}")]
+        public async Task<IActionResult> RollbackPendingChanges(string guid)
+        {
+            var result = await _pendingChangesService.RollbackChanges(Guid.Parse(guid)); if (!result)
+            {
+                return BadRequest("Nema rollback promena za upis u bazu za dati GUID.");
+            }
+
+            return Ok("Promene su uspešno rollback-ovane za dati GUID.");
         }
 
 

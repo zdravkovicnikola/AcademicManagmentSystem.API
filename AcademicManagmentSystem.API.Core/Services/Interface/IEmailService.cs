@@ -1,4 +1,4 @@
-﻿namespace AcademicManagmentSystem.API.Services.Interface
+﻿namespace AcademicManagmentSystem.API.Core.Services.Interface
 {
     public interface IEmailService
     {

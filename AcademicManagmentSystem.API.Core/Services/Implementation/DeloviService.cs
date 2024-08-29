@@ -1,12 +1,12 @@
 ﻿using AcademicManagmentSystem.API.Contracts;
 using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Delovi;
-using AcademicManagmentSystem.API.Models.Studenti;
-using AcademicManagmentSystem.API.Services.Interface;
+using AcademicManagmentSystem.API.Core.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Studenti;
+using AcademicManagmentSystem.API.Core.Services.Interface;
 using AutoMapper;
 using System.Collections.Generic;
 
-namespace AcademicManagmentSystem.API.Services.Implementation
+namespace AcademicManagmentSystem.API.Core.Services.Implementation
 {
     public class DeloviService : IDeloviService
     {

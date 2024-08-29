@@ -1,6 +1,6 @@
-﻿using AcademicManagmentSystem.API.Models.Katedre;
+﻿using AcademicManagmentSystem.API.Core.Models.Katedre;
 
-namespace AcademicManagmentSystem.API.Models.Predavaci
+namespace AcademicManagmentSystem.API.Core.Models.Predavaci
 {
     public class UpdatePredavacDto
     {

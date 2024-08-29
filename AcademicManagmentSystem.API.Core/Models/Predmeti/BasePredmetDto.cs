@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AcademicManagmentSystem.API.Models.Predmeti
+namespace AcademicManagmentSystem.API.Core.Models.Predmeti
 {
     public abstract class BasePredmetDto
     {

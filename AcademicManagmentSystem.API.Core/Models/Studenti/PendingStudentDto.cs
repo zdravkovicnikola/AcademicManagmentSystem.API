@@ -1,6 +1,6 @@
-﻿using AcademicManagmentSystem.API.Models.Delovi;
+﻿using AcademicManagmentSystem.API.Core.Models.Delovi;
 
-namespace AcademicManagmentSystem.API.Models.Studenti
+namespace AcademicManagmentSystem.API.Core.Models.Studenti
 {
     public class PendingStudentDto
     {

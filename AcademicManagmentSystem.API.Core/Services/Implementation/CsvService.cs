@@ -1,10 +1,10 @@
-﻿using AcademicManagmentSystem.API.Models;
-using AcademicManagmentSystem.API.Services.Interface;
+﻿using AcademicManagmentSystem.API.Core.Models;
+using AcademicManagmentSystem.API.Core.Services.Interface;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
 
-namespace AcademicManagmentSystem.API.Services.Implementation
+namespace AcademicManagmentSystem.API.Core.Services.Implementation
 {
     public class CsvService : ICsvService
     {

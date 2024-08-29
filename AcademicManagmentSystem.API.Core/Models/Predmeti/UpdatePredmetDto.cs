@@ -1,8 +1,8 @@
-﻿using AcademicManagmentSystem.API.Models.Delovi;
-using AcademicManagmentSystem.API.Models.Katedre;
-using AcademicManagmentSystem.API.Models.Predavaci;
+﻿using AcademicManagmentSystem.API.Core.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Katedre;
+using AcademicManagmentSystem.API.Core.Models.Predavaci;
 
-namespace AcademicManagmentSystem.API.Models.Predmeti
+namespace AcademicManagmentSystem.API.Core.Models.Predmeti
 {
     public class UpdatePredmetDto : BasePredmetDto
     {

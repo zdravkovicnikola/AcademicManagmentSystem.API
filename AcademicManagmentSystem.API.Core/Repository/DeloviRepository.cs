@@ -1,6 +1,6 @@
 ﻿using AcademicManagmentSystem.API.Contracts;
 using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Delovi;
 using Microsoft.EntityFrameworkCore;
 using Deo = AcademicManagmentSystem.API.Data.Deo;
 

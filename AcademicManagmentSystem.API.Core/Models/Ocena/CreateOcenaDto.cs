@@ -1,4 +1,4 @@
-﻿namespace AcademicManagmentSystem.API.Models.Ocena
+﻿namespace AcademicManagmentSystem.API.Core.Models.Ocena
 {
     public class CreateOcenaDto
     {

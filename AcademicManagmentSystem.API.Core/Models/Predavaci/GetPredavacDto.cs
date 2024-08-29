@@ -1,7 +1,7 @@
-﻿using AcademicManagmentSystem.API.Models.Katedre;
-using AcademicManagmentSystem.API.Models.Predmeti;
+﻿using AcademicManagmentSystem.API.Core.Models.Katedre;
+using AcademicManagmentSystem.API.Core.Models.Predmeti;
 
-namespace AcademicManagmentSystem.API.Models.Predavaci
+namespace AcademicManagmentSystem.API.Core.Models.Predavaci
 {
     public class GetPredavacDto
     {

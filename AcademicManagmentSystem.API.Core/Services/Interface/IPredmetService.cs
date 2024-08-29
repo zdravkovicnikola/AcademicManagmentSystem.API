@@ -1,7 +1,7 @@
 ﻿using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Predmeti;
+using AcademicManagmentSystem.API.Core.Models.Predmeti;
 
-namespace AcademicManagmentSystem.API.Services.Interface
+namespace AcademicManagmentSystem.API.Core.Services.Interface
 {
     public interface IPredmetService
     {

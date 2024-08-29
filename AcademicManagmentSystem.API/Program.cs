@@ -1,11 +1,10 @@
 ﻿using AcademicManagmentSystem.API.Configurations;
 using AcademicManagmentSystem.API.Contracts;
+using AcademicManagmentSystem.API.Core.Services.Implementation;
 using AcademicManagmentSystem.API.Data;
 using AcademicManagmentSystem.API.Repository;
-using AcademicManagmentSystem.API.Services.Implementation;
-using AcademicManagmentSystem.API.Services.Interface;
+using AcademicManagmentSystem.API.Core.Services.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
@@ -59,7 +58,10 @@ builder.Services.AddScoped<IUploadExamService, UploadExamService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IDeloviService, DeloviService>();
 builder.Services.AddScoped<IPredmetService, PredmetService>();
-builder.Services.AddSingleton<IPendingChangesService, PendingChangesService>();
+builder.Services.AddScoped < IPendingChangesService, PendingChangesService>();
+builder.Services.AddSingleton<IPendingChangesStore, PendingChangesStore>();
+
+
 
 builder.Services.AddScoped<IPredmetiRepository, PredmetiRepository>();//Ovo ce vaziti u duzini jednog HTTP zahteva
 builder.Services.AddScoped<IDeloviRepository,DeloviRepository>();

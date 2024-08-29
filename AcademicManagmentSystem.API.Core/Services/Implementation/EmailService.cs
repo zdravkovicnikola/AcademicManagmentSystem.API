@@ -1,6 +1,6 @@
-﻿using AcademicManagmentSystem.API.Services.Interface;
+﻿using AcademicManagmentSystem.API.Core.Services.Interface;
 
-namespace AcademicManagmentSystem.API.Services.Implementation
+namespace AcademicManagmentSystem.API.Core.Services.Implementation
 {
     public class EmailService: IEmailService
     {

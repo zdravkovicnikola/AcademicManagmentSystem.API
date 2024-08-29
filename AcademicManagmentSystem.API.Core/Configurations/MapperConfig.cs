@@ -1,10 +1,10 @@
 ﻿using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Delovi;
-using AcademicManagmentSystem.API.Models.Katedre;
-using AcademicManagmentSystem.API.Models.Ocena;
-using AcademicManagmentSystem.API.Models.Predavaci;
-using AcademicManagmentSystem.API.Models.Predmeti;
-using AcademicManagmentSystem.API.Models.Studenti;
+using AcademicManagmentSystem.API.Core.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Katedre;
+using AcademicManagmentSystem.API.Core.Models.Ocena;
+using AcademicManagmentSystem.API.Core.Models.Predavaci;
+using AcademicManagmentSystem.API.Core.Models.Predmeti;
+using AcademicManagmentSystem.API.Core.Models.Studenti;
 using AutoMapper;
 using Deo = AcademicManagmentSystem.API.Data.Deo;
 

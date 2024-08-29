@@ -1,4 +1,4 @@
-﻿namespace AcademicManagmentSystem.API.Models
+﻿namespace AcademicManagmentSystem.API.Core.Models
 {
     public class BasicDTO
     {

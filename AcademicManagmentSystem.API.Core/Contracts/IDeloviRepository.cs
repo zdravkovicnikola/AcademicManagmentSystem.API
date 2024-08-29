@@ -1,5 +1,5 @@
 ﻿using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Delovi;
 
 namespace AcademicManagmentSystem.API.Contracts
 {

@@ -1,6 +1,6 @@
-﻿using AcademicManagmentSystem.API.Models.Predmeti;
+﻿using AcademicManagmentSystem.API.Core.Models.Predmeti;
 
-namespace AcademicManagmentSystem.API.Models.Predavaci
+namespace AcademicManagmentSystem.API.Core.Models.Predavaci
 {
 
     public class GetPredmetPredavacDto

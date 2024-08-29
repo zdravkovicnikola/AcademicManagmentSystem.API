@@ -1,4 +1,4 @@
-﻿namespace AcademicManagmentSystem.API.Models.Katedre
+﻿namespace AcademicManagmentSystem.API.Core.Models.Katedre
 {
     public class UpdateKatedraDto
     {

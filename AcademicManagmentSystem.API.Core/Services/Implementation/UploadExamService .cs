@@ -1,10 +1,10 @@
 ﻿using AcademicManagmentSystem.API.Contracts;
 using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models;
-using AcademicManagmentSystem.API.Services.Interface;
+using AcademicManagmentSystem.API.Core.Models;
+using AcademicManagmentSystem.API.Core.Services.Interface;
 using Microsoft.Extensions.Logging;
 
-namespace AcademicManagmentSystem.API.Services.Implementation
+namespace AcademicManagmentSystem.API.Core.Services.Implementation
 {
     public class UploadExamService : IUploadExamService
     {

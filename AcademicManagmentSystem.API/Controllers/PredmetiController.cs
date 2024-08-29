@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using AcademicManagmentSystem.API.Data;
-using AcademicManagmentSystem.API.Models.Predmeti;
-using AutoMapper;
-using AcademicManagmentSystem.API.Models.Predavaci;
-using AcademicManagmentSystem.API.Models.Katedre;
-using AcademicManagmentSystem.API.Contracts;
-using AcademicManagmentSystem.API.Services.Interface;
-using AcademicManagmentSystem.API.Services.Implementation;
+using AcademicManagmentSystem.API.Core.Models.Predmeti;
+using AcademicManagmentSystem.API.Core.Services.Interface;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
