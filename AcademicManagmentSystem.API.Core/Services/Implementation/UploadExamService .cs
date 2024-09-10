@@ -14,6 +14,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
         private readonly IPredmetiRepository _predmetiRepository;
         private readonly ILogger<UploadExamService> _logger;
         private readonly IEmailService _emailService;
+        private readonly IOcenaService _ocenaService;
 
         public UploadExamService(
             IStudentRepository studentRepository,
@@ -21,7 +22,8 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             ITipRepository tipRepository,
             IPredmetiRepository predmetiRepository,
             ILogger<UploadExamService> logger,
-            IEmailService emailService)
+            IEmailService emailService,
+            IOcenaService ocenaService)
         {
             _studentRepository = studentRepository;
             _deloviRepository = deloviRepository;
@@ -29,8 +31,9 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             _predmetiRepository = predmetiRepository;
             _logger = logger;
             _emailService = emailService;
+            _ocenaService = ocenaService;
         }
-        public async Task ProcessOrUpdatePrakticniRecord(BasicDTO record, bool isUpdate)
+        public async Task ProcessOrUpdatePrakticniRecord(BasicDTO record, bool isUpdate, int predmetid)
         {
             var ime = record.Data[0];
             var prezime = record.Data[1];
@@ -55,7 +58,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             if (formattedDatum == null)
             {
                 _logger.LogWarning($"Invalid date format in row: {formattedDatum}");
-                return; 
+                return;
             }
 
             var student = await _studentRepository.GetAsyncStudent(index);
@@ -73,26 +76,25 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                 _logger.LogInformation($"Student added");
             }
             var prakticni = student.Delovi
-                .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 2);
+                .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 2 && d.PredmetId == predmetid);
 
-            if (prakticni == null) { 
-            prakticni = new Deo
+            if (prakticni == null)
             {
-                TipId = 2,
-                Tip = await _tipRepository.GetAsync(2),
-                StudentId = student.StudentId,
-                Student = student,
-                BrojPoena = poeni,
-                Datum = DateTime.Parse(formattedDatum),
-                PredmetId = 1,
-                Predmet = await _predmetiRepository.GetAsync(1),
-                Napomena = "Nema napomene."
-            };
-
-            student.Delovi.Add(prakticni); // Dodajemo prakticni deo studentu
-            await _deloviRepository.AddAsync(prakticni);
-            _logger.LogInformation($"Prakticni added");
-            } ////////////
+                prakticni = new Deo
+                {
+                    TipId = 2,
+                    Tip = await _tipRepository.GetAsync(2),
+                    StudentId = student.StudentId,
+                    Student = student,
+                    BrojPoena = poeni,
+                    Datum = DateTime.Parse(formattedDatum),
+                    PredmetId = predmetid,
+                    Predmet = await _predmetiRepository.GetAsync(predmetid),
+                    Napomena = "Nema napomene."
+                };
+                await _deloviRepository.AddAsync(prakticni);
+                _logger.LogInformation($"Prakticni added");
+            } 
             else if (isUpdate && prakticni.BrojPoena < poeni)
             {
                 prakticni.BrojPoena = poeni;
@@ -102,22 +104,30 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             if (eliminacioni && prakticni.BrojPoena > 51)
             {
                 prakticni.Polozio = true;
-
-                await _deloviRepository.UpdateAsync(prakticni); // Azuriraj entitet Deo
+                await _deloviRepository.UpdateAsync(prakticni);
                 _logger.LogInformation($"Deo updated");
-
             }
+            student.Delovi.Add(prakticni);
+            var ocena = await _ocenaService.IzracunajOcenuZaStudenta(student, prakticni.PredmetId);
+
+            student.Ocene.Add(new Ocena
+            {
+                StudentId = student.StudentId,
+                PredmetId = prakticni.PredmetId,
+                DatumPolaganja = DateTime.Now,
+                VrednostOcene = ocena
+            });
             await _studentRepository.UpdateAsync(student); // Azuriraj entitet Student
             _logger.LogInformation($"Student updated");
         }
 
-        public async Task ProcessOrUpdateUsmeniRecord(BasicDTO record, bool isUpdate)
+        public async Task ProcessOrUpdateUsmeniRecord(BasicDTO record, bool isUpdate, int predmetid)
         {
             var ime = record.Data[0];
-            var prezime = record.Data[1]; 
-            var index = _emailService.ExtractIndexFromEmail(record.Data[2]); 
+            var prezime = record.Data[1];
+            var index = _emailService.ExtractIndexFromEmail(record.Data[2]);
             var status = record.Data[3];
-            var datum = ReplaceSerbianMonths(record.Data[4]); 
+            var datum = ReplaceSerbianMonths(record.Data[4]);
             var poeniString = record.Data[7].Replace(",", ".");
 
             if (!double.TryParse(poeniString, out double poeni))
@@ -151,7 +161,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             }
 
             var usmeni = student.Delovi
-                .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 1);
+                .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 1 && d.PredmetId == predmetid);
 
             if (usmeni == null)
             {
@@ -163,11 +173,10 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                     Student = student,
                     BrojPoena = poeni,
                     Datum = dateTime,
-                    PredmetId = 1,
-                    Predmet = await _predmetiRepository.GetAsync(1),
+                    PredmetId = predmetid,
+                    Predmet = await _predmetiRepository.GetAsync(predmetid),
                     Napomena = "Nema napomene."
                 };
-                student.Delovi.Add(usmeni);
                 await _deloviRepository.AddAsync(usmeni);
                 _logger.LogInformation($"Usmeni added");
             }
@@ -185,9 +194,20 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                 _logger.LogInformation($"Deo updated");
             }
 
+            student.Delovi.Add(usmeni);
+            var ocena = await _ocenaService.IzracunajOcenuZaStudenta(student, usmeni.PredmetId);
+
+            student.Ocene.Add(new Ocena
+            {
+                StudentId = student.StudentId,
+                PredmetId = usmeni.PredmetId,
+                DatumPolaganja = DateTime.Now,
+                VrednostOcene = ocena
+            });
             await _studentRepository.UpdateAsync(student);
             _logger.LogInformation($"Student updated");
         }
+
 
         private string ReplaceSerbianMonths(string datum)
         {

@@ -6,12 +6,11 @@ namespace AcademicManagmentSystem.API.Core.Models.Predmeti
 {
     public class UpdatePredmetDto : BasePredmetDto
     {
-        public int predmetId { get; set; }
+
     }
 
     public class UpdatePredmetDetailsDto : BasePredmetDto
     {
-        public int predmetId { get; set; }
         public IList<UpdatePredmetPredavacDto> PredmetPredavaci { get; set; }
     }
 

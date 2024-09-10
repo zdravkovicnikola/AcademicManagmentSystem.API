@@ -14,25 +14,27 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
         private readonly IEmailService _emailService;
         private readonly IDeloviRepository _deloviRepository;
         private readonly IPendingChangesStore _pendingStudentsDictionary;
+        private readonly IOcenaService _ocenaService;
         private readonly IMapper _mapper;
         public List<Student> pendingStudents = new List<Student>();
-        public List<Student> rollbackStudents = new List<Student>();
 
         public PendingChangesService(
             IStudentRepository studentRepository,
             IMapper mapper,
             IEmailService emailService,
             IDeloviRepository deloviRepository,
-            IPendingChangesStore pendingChangesStore)
+            IPendingChangesStore pendingChangesStore,
+            IOcenaService ocenaService)
         {
             _pendingStudentsDictionary = pendingChangesStore;
+            _ocenaService = ocenaService;
             _studentRepository = studentRepository;
             _mapper = mapper;
             _emailService = emailService;
             _deloviRepository = deloviRepository;
         }
 
-        public async Task ProcessPendingPrakticni(BasicDTO record)
+        public async Task ProcessPendingPrakticni(BasicDTO record, int predmetId)
         {
             var ime = record.Data[0];
             var prezime = record.Data[1];
@@ -64,7 +66,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             }
 
             var prakticni = student.Delovi
-                .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 2);
+                .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 2 && d.PredmetId == predmetId);
 
             if (prakticni == null)
             {
@@ -77,15 +79,15 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                 prakticni.BrojPoena = poeni;
                 if (eliminacioni && !prakticni.Polozio && prakticni.BrojPoena > 51)
                 {
-                    prakticni.Napomena += $"Promena statusa: Položio";
+                    prakticni.Napomena += $"Promena statusa: Položen";
                     prakticni.Polozio = true;
                 }
                 student.Delovi.Add(prakticni);
                 pendingStudents.Add(student);
             }
-        
+
         }
-        public async Task ProcessPendingUsmeni(BasicDTO record)
+        public async Task ProcessPendingUsmeni(BasicDTO record, int predmetid)
         {
             var ime = record.Data[0];
             var prezime = record.Data[1];
@@ -105,7 +107,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             }
 
             var formattedDatum = dateTime.ToString("d.M.yyyy");
-            
+
             var student = await _studentRepository.GetAsyncStudent(index);
             if (student == null)
             {
@@ -113,7 +115,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             }
 
             var usmeni = student.Delovi
-            .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 1);
+            .FirstOrDefault(d => d.Datum.Date == DateTime.Parse(formattedDatum) && d.TipId == 1 && d.PredmetId == predmetid);
 
             if (usmeni == null)
             {
@@ -126,15 +128,14 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                 usmeni.BrojPoena = poeni;
                 if (status == "Завршени" && !usmeni.Polozio && usmeni.BrojPoena > 51)
                 {
-                    usmeni.Napomena += $"Promena statusa: Položio";
+                    usmeni.Napomena += $"Promena statusa: Položen";
                     usmeni.Polozio = true;
                 }
                 student.Delovi.Add(usmeni);
                 pendingStudents.Add(student);
             }
-            
-        }
 
+        }
         public async Task<List<PendingStudentDto>> ReturnListPendingStudents()
         {
             //GUID
@@ -152,13 +153,13 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             // Cuvaj listu u dictionary sa GUID-om kao ključem
             _pendingStudentsDictionary.AddPendingStudents(guid, result);
             pendingStudents = new List<Student>();
+
             // Vracamo GUID i listu kao tuple
             return (result);
         }
-
         public async Task<bool> CommitPendingChanges(Guid guid)
         {
-            // Preuzmi pending studente na osnovu GUID-a
+            
             var pendingStudents = _pendingStudentsDictionary.GetPendingStudents(guid);
 
             if (pendingStudents == null || !pendingStudents.Any())
@@ -166,56 +167,68 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                 return false;
             }
 
-            // Pripremi rollback data
             var rollbackData = new List<PendingStudentDto>();
 
             try
             {
                 foreach (var pendingStudent in pendingStudents)
                 {
-                    // Učitaj studenta iz baze zajedno sa svim delovima
                     var studentFromDb = await _studentRepository.GetAsyncStudent(pendingStudent.Index);
 
-                    
                     if (studentFromDb == null)
                     {
                         continue;
                     }
 
                     var deoToUpdate = studentFromDb.Delovi.FirstOrDefault(d => d.DeoId == pendingStudent.Deo.DeoId);
-                    
+
                     if (deoToUpdate != null && pendingStudent.Deo.BrojPoena > deoToUpdate.BrojPoena)
                     {
-                        //Dodajemo u rollback pre update-a
+
                         var studentDto = _mapper.Map<PendingStudentDto>(studentFromDb);
                         studentDto.Deo = deoToUpdate != null ? _mapper.Map<DeoForPendingStudentDto>(deoToUpdate) : null;
                         rollbackData.Add(studentDto);
 
-                        // Update
+                        studentFromDb.Delovi.Remove(deoToUpdate);
+
                         deoToUpdate.BrojPoena = pendingStudent.Deo.BrojPoena;
                         deoToUpdate.Napomena = pendingStudent.Deo.Napomena;
                         deoToUpdate.Polozio = pendingStudent.Deo.Polozio;
 
-                        // Save
+                        if (deoToUpdate.Polozio)
+                        {
+                            studentFromDb.Delovi.Add(deoToUpdate);
+                            var ocena = await _ocenaService.IzracunajOcenuZaStudenta(studentFromDb, deoToUpdate.PredmetId);
+                            
+                            studentFromDb.Ocene.Add(new Ocena
+                            {
+                                StudentId = studentFromDb.StudentId,
+                                PredmetId = deoToUpdate.PredmetId,
+                                DatumPolaganja = DateTime.Now,
+                                VrednostOcene = ocena
+                            });
+                            if(ocena != 5)
+                            deoToUpdate.Napomena += $" Kompletiran ispit  ocenom {ocena}.";
+                            await _studentRepository.UpdateAsync(studentFromDb);
+                        }
+
                         await _deloviRepository.UpdateAsync(deoToUpdate);
                     }
                 }
 
-                // Sačuvaj rollback data
                 _pendingStudentsDictionary.AddToRollbackStore(guid, rollbackData);
 
-                // Ukloni pending promene nakon uspešnog commita
                 _pendingStudentsDictionary.RemovePendingStudents(guid);
 
                 return true;
             }
             catch (Exception)
             {
-                // U slučaju greške, vrati prethodno stanje
                 await RollbackChanges(guid);
                 return false;
             }
         }
+
         public async Task<bool> RollbackChanges(Guid guid)
         {
             var rollbackData = _pendingStudentsDictionary.GetRollbackData(guid);
@@ -238,13 +251,14 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
 
                 if (deoToUpdate != null)
                 {
-
+                    studentFromDb.Ocene.Remove(studentFromDb.Ocene.LastOrDefault());
                     // Update
                     deoToUpdate.BrojPoena = rollbackStudent.Deo.BrojPoena;
                     deoToUpdate.Napomena = rollbackStudent.Deo.Napomena;
                     deoToUpdate.Polozio = rollbackStudent.Deo.Polozio;
 
                     // Save
+                    await _studentRepository.UpdateAsync(studentFromDb);
                     await _deloviRepository.UpdateAsync(deoToUpdate);
                     }
             }
@@ -253,8 +267,6 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             _pendingStudentsDictionary.RemoveRollbackData(guid);
             return true;
         }
-
-
         private string ReplaceSerbianMonths(string datum)
         {
             return datum
@@ -271,28 +283,24 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                 .Replace("мај", "5.")
                 .Replace("јун", "6.");
         }
-
         public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetAllPendingChanges()
         {
             return _pendingStudentsDictionary.GetAllPendingChanges();
         }
-
         public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetAllRollbacks()
         {
             return _pendingStudentsDictionary.GetRollbackData();
         }
-
         public async Task<bool> RemovePendingChanges(Guid guid)
         {
-            // Preuzmi pending studente na osnovu GUID-a
+            
             var pendingStudents = _pendingStudentsDictionary.GetPendingStudents(guid);
 
-            if (pendingStudents == null || !pendingStudents.Any())
-            {
-                return false;
-            }
+            //if (pendingStudents == null || !pendingStudents.Any())
+            //{
+            //    return false;
+            //}
 
-            // Ukloni pending studente iz dictionary-ja
             _pendingStudentsDictionary.RemovePendingStudents(guid);
 
             return true;

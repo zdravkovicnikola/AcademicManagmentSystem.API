@@ -40,20 +40,30 @@ namespace AcademicManagmentSystem.API.Repository
         {
             return await _context.Studenti
                 .Include(s => s.Delovi)
-                .ThenInclude(d => d.Tip) 
-                .Where(s => s.Delovi.Any(d => d.PredmetId == predmetId && d.Polozio && d.Datum > startDate && d.Datum < endDate)) // Filtriramo studente koji imaju deo za dati predmet
+                .ThenInclude(d => d.Tip)
+                .Include(o => o.Ocene) // Uključuje ocene za studente
+                .Where(s => s.Delovi.Any(d => d.PredmetId == predmetId && d.Datum >= startDate && d.Datum <= endDate))
                 .Select(s => new Student
                 {
                     Ime = s.Ime,
                     Prezime = s.Prezime,
                     Index = s.Index,
+
+                  
                     Delovi = s.Delovi
-                        .Where(d => d.PredmetId == predmetId && d.Polozio && d.Datum > startDate && d.Datum < endDate) // Filtriramo delove koji pripadaju datom predmetu
+                        .Where(d => d.PredmetId == predmetId && d.Datum >= startDate && d.Datum <= endDate)
                         .GroupBy(d => new { d.StudentId, d.TipId })
                         .Select(g => g.OrderByDescending(d => d.Datum).FirstOrDefault())
+                        .ToList(),
+
+                    Ocene = s.Ocene
+                        .Where(o => o.PredmetId == predmetId)
+                        .OrderByDescending(o => o.DatumPolaganja)
+                        .Take(1) 
                         .ToList()
                 })
                 .ToListAsync();
         }
+
     }
 }

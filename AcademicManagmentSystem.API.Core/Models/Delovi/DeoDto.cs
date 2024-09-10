@@ -27,9 +27,7 @@ namespace AcademicManagmentSystem.API.Core.Models.Delovi
         public double MaxBrPoena { get; set; } = 100;
         public bool Polozio { get; set; }
         public string Napomena { get; set; }
-
         public GetStudentDto Student { get; set; }
-        public Tip Tip { get; set; }
 
     }
 

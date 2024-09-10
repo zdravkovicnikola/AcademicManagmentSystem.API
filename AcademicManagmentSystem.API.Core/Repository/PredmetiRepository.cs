@@ -31,5 +31,16 @@ namespace AcademicManagmentSystem.API.Repository
             return await _context.Predmeti
                 .FirstOrDefaultAsync(p => p.Sifra == sifra);
         }
+
+        public async Task<int> GetBrojTipovaDelova(int predmetId)
+        {
+            return await _context.Predmeti
+                .Include(p => p.Delovi)
+                .ThenInclude(d => d.Tip)
+                .Where(p => p.PredmetId == predmetId)
+                .SelectMany(p => p.Delovi.Select(d => d.Tip.TipId))
+                .Distinct()
+                .CountAsync(); 
+        }
     }
 }

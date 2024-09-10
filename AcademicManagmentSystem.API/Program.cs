@@ -7,6 +7,7 @@ using AcademicManagmentSystem.API.Core.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,16 +40,17 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", 
-        b => b.AllowAnyHeader() //omogucava sve HTTP zaglavlje
-            .AllowAnyOrigin() //dozvoljava pristup resursima sa bilo kog izvora (origin)
-            .AllowAnyMethod()); //dozvoljava sve HTTP metode (GET, POST, PUT, DELETE itd.)
-}); //Ova konfiguracija omogucava bilo kojoj spoljnoj strani da pristupi resursima
-    //na nasem serveru bez ogranicenja, sto moze biti korisno u razvojnom okruzenju,
-    //ali moze biti opasno u produkcionom okruzenju
+    options.AddPolicy("AllowFrontend", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000") // Tvoj React app URL
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 
 
-builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration)); //Ovim postavkama omogucavamo da nasa aplikacija koristi Serilog za logovanje, pri cemu logovi mogu biti ispisani na konzoli. Serilog omogucava detaljno logovanje razlicitih dogadjaja u nasoj aplikaciji, sto nam pomaze u pronalazenju i resavanju problema.
+
+builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration)); 
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));//ukljucujemo automapper u projekat 
 
@@ -59,8 +61,8 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IDeloviService, DeloviService>();
 builder.Services.AddScoped<IPredmetService, PredmetService>();
 builder.Services.AddScoped < IPendingChangesService, PendingChangesService>();
+builder.Services.AddScoped<IOcenaService, OcenaService>();
 builder.Services.AddSingleton<IPendingChangesStore, PendingChangesStore>();
-
 
 
 builder.Services.AddScoped<IPredmetiRepository, PredmetiRepository>();//Ovo ce vaziti u duzini jednog HTTP zahteva
@@ -79,7 +81,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseSerilogRequestLogging(); // ovo je middleware koji dolazi uz Serilog i koristi se za automatsko logovanje informacija o HTTP zahtevima i odgovorima
 
-app.UseCors("AllowAll"); //ovde samo pozivamo tu politiku koju smo napravili
+app.UseRouting();
+
+// Aktiviraj CORS politiku
+app.UseCors("AllowFrontend");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.UseHttpsRedirection();
 

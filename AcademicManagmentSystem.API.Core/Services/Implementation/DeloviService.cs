@@ -5,6 +5,7 @@ using AcademicManagmentSystem.API.Core.Models.Studenti;
 using AcademicManagmentSystem.API.Core.Services.Interface;
 using AutoMapper;
 using System.Collections.Generic;
+using AcademicManagmentSystem.API.Core.Models.Ocena;
 
 namespace AcademicManagmentSystem.API.Core.Services.Implementation
 {
@@ -55,15 +56,9 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             return deloviDto;
         }
 
-        public async Task<IEnumerable<DeoDto>> GetAllResultsForSubject(string sifraPredmeta)
+        public async Task<IEnumerable<DeoDto>> GetAllResultsForSubject(int predmetId , DateTime datum, int sifraTipa)
         {
-            var predmet = await _predmetiRepository.GetAsyncByPass(sifraPredmeta);
-            if (predmet == null)
-            {
-                throw new InvalidOperationException("Ne postoji predmet sa zadatom šifrom. Molimo proverite unos.");
-            }
-
-            var delovi = await _deloviRepository.GetAllResultsForSubjectAsync(predmet.PredmetId);
+            var delovi = await _deloviRepository.GetAllResultsForSubjectAsync(predmetId, datum, sifraTipa);
 
             var deloviDto = _mapper.Map<IEnumerable<DeoDto>>( delovi);
             return deloviDto;
@@ -95,7 +90,9 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                     .Where(d => d.PredmetId == predmet.PredmetId)
                     .Select(d => _mapper.Map<DeoForStudentDto>(d))
                     .ToList();
+                studentDto.Ocena = _mapper.Map<OcenaDto>(student.Ocene.FirstOrDefault());
                 return studentDto;
+
             }).ToList();
 
             return result;

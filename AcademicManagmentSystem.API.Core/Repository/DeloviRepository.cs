@@ -19,15 +19,15 @@ namespace AcademicManagmentSystem.API.Repository
             return await _context.Delovi.Include(d => d.Tip).Where(d => d.PredmetId == predmetId && d.StudentId == studentId).ToListAsync();
         }
 
-        public async Task<IEnumerable<Deo>> GetAllResultsForSubjectAsync(int predmetId)
+        public async Task<IEnumerable<Deo>> GetAllResultsForSubjectAsync(int predmetId, DateTime datum, int tipId)
         {
             return await _context.Delovi
-                                        .Include(d => d.Student). Include(d => d.Tip)
-                                        .Where(d => d.PredmetId == predmetId)
-                                        .GroupBy(d => new { d.StudentId, d.TipId })
-                                        .Select(g => g.OrderByDescending(d => d.Datum).FirstOrDefault())
-                                        .ToListAsync();
+                .Include(d => d.Student)
+                .Include(d => d.Tip)
+                .Where(d => d.PredmetId == predmetId && d.Datum.Date == datum.Date && d.TipId == tipId)
+                .ToListAsync();
         }
+
 
         public async Task<IList<Tip>> GetTipoviForSubject(int predmetId)
         {

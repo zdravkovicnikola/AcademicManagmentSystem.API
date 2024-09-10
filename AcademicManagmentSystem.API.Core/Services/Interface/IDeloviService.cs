@@ -8,7 +8,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Interface
     {
         
         Task<IEnumerable<StudentDeoDto>> GetAllResultsForSubjectAndStudent(string sifraPredmeta, string indeks);
-        Task<IEnumerable<DeoDto>> GetAllResultsForSubject(string sifraPredmeta);
+        Task<IEnumerable<DeoDto>> GetAllResultsForSubject(int predmetId, DateTime datum, int tipId);
         Task<IList<Tip>> GetTipoviForSubject(int id);
         Task<bool> DeleteDeoAsync(int id);
         Task<IEnumerable<StudentWithDeoDto>> GetResultsByPredmet(string sifraPredmeta, DateTime startDate, DateTime endDate);

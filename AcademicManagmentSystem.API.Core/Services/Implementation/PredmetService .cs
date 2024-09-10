@@ -72,11 +72,6 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
 
         public async Task<Predmet> UpdateSubject(int id, UpdatePredmetDto updatePredmetDto)
         {
-            if (id != updatePredmetDto.predmetId)
-            {
-                throw new ArgumentException("ID predmeta se ne poklapa sa ID-om u DTO objektu.");
-            }
-
             var predmet = await _predmetiRepository.GetAsync(id);
             if (predmet == null)
             {

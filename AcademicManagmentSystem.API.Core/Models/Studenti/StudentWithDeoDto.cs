@@ -1,5 +1,6 @@
 ﻿using AcademicManagmentSystem.API.Data;
 using AcademicManagmentSystem.API.Core.Models.Delovi;
+using AcademicManagmentSystem.API.Core.Models.Ocena;
 
 namespace AcademicManagmentSystem.API.Core.Models.Studenti
 {
@@ -10,5 +11,6 @@ namespace AcademicManagmentSystem.API.Core.Models.Studenti
         public string Index { get; set; }
 
         public IEnumerable<DeoForStudentDto> Delovi { get; set; }
+        public OcenaDto Ocena { get; set; }
     }
 }

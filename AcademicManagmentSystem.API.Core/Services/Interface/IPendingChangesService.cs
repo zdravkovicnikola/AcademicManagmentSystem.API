@@ -6,8 +6,8 @@ namespace AcademicManagmentSystem.API.Core.Services.Interface
 {
     public interface IPendingChangesService
     {
-        Task ProcessPendingPrakticni(BasicDTO record);
-        Task ProcessPendingUsmeni(BasicDTO record);
+        Task ProcessPendingPrakticni(BasicDTO record, int predmetid);
+        Task ProcessPendingUsmeni(BasicDTO record, int predmetid);
         Task<List<PendingStudentDto>> ReturnListPendingStudents();
         Task<bool> CommitPendingChanges(Guid guid);
         public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetAllPendingChanges();

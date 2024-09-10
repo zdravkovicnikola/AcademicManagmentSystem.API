@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AcademicManagmentSystem.API.Core.Services.Interface;
+using AcademicManagmentSystem.API.Data;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
@@ -24,11 +25,11 @@ namespace AcademicManagmentSystem.API.Controllers
 
         // GET: api/Delovi
         [HttpGet("results")]
-        public async Task<IActionResult> GetAllResultsForSubject(string sifraPredmeta)
+        public async Task<IActionResult> GetAllResultsForSubject(int predmetId, DateTime datum, int sifraTipa )
         {
             try
             {
-                var results = await _deloviService.GetAllResultsForSubject(sifraPredmeta);
+                var results = await _deloviService.GetAllResultsForSubject(predmetId, datum , sifraTipa);
                 return Ok(results);
             }
             catch (InvalidOperationException ex)
@@ -69,8 +70,8 @@ namespace AcademicManagmentSystem.API.Controllers
 
         
 
-        [HttpPost("upload-usmeni")]
-        public async Task<IActionResult> UploadUsmeni(IFormFile file)
+        [HttpPost("upload-usmeni/{predmetId}")]
+        public async Task<IActionResult> UploadUsmeni(IFormFile file, int predmetId)
         {
             _logger.LogInformation("UploadUsmeni method called");
             if (file == null || file.Length == 0)
@@ -91,15 +92,15 @@ namespace AcademicManagmentSystem.API.Controllers
 
             foreach (var record in records)
             {
-                await _uploadExamService.ProcessOrUpdateUsmeniRecord(record,false);
+                await _uploadExamService.ProcessOrUpdateUsmeniRecord(record,false, predmetId);
             }
 
             return Ok("Usmeni CSV data successfully uploaded.");
         }
 
 
-        [HttpPost("upload-prakticni")]
-        public async Task<IActionResult> UploadPrakticni(IFormFile file)
+        [HttpPost("upload-prakticni/{predmetId}")]
+        public async Task<IActionResult> UploadPrakticni(IFormFile file, int predmetId)
         {
             _logger.LogInformation("UploadPrakticni method called");
             if (file == null || file.Length == 0)
@@ -120,14 +121,14 @@ namespace AcademicManagmentSystem.API.Controllers
             _logger.LogInformation("CSV data loaded");
             foreach (var record in records)
             {
-                await _uploadExamService.ProcessOrUpdatePrakticniRecord(record, false);
+                await _uploadExamService.ProcessOrUpdatePrakticniRecord(record, false, predmetId);
             }
 
             return Ok("Prakticni CSV data successfully uploaded.");
         }
 
-        [HttpPut("update-prakticni")]
-        public async Task<IActionResult> UpdatePrakticni(IFormFile file)
+        [HttpPut("update-prakticni/{predmetId}")]
+        public async Task<IActionResult> UpdatePrakticni(IFormFile file, int predmetId)
         {
             _logger.LogInformation("UploadPrakticni method called");
             if (file == null || file.Length == 0)
@@ -148,14 +149,14 @@ namespace AcademicManagmentSystem.API.Controllers
             _logger.LogInformation("CSV data loaded");
             foreach (var record in records)
             {
-                await _uploadExamService.ProcessOrUpdatePrakticniRecord(record, true);
+                await _uploadExamService.ProcessOrUpdatePrakticniRecord(record, true, predmetId);
             }
 
             return Ok("Prakticni CSV data successfully uploaded.");
         }
 
-        [HttpPut("update-usmeni")]
-        public async Task<IActionResult> UpdateUsmeni(IFormFile file)
+        [HttpPut("update-usmeni/{predmetId}")]
+        public async Task<IActionResult> UpdateUsmeni(IFormFile file, int predmetId)
         {
             _logger.LogInformation("UpdateUsmeni method called");
             if (file == null || file.Length == 0)
@@ -176,14 +177,14 @@ namespace AcademicManagmentSystem.API.Controllers
 
             foreach (var record in records)
             {
-                await _uploadExamService.ProcessOrUpdateUsmeniRecord(record,true);
+                await _uploadExamService.ProcessOrUpdateUsmeniRecord(record,true, predmetId);
             }
 
             return Ok("Usmeni CSV data successfully uploaded.");
         }
 
-        [HttpPut("upload-prakticni/uvid")]
-        public async Task<IActionResult> UploadPrakticniUvid(IFormFile file)
+        [HttpPut("upload-prakticni/uvid/{predmetId}")]
+        public async Task<IActionResult> UploadPrakticniUvid(IFormFile file, int predmetId)
         {
             _logger.LogInformation("UploadUsmeni method called");
             if (file == null || file.Length == 0)
@@ -204,13 +205,13 @@ namespace AcademicManagmentSystem.API.Controllers
 
             foreach (var record in records)
             {
-                await _pendingChangesService.ProcessPendingPrakticni(record);
+                await _pendingChangesService.ProcessPendingPrakticni(record, predmetId);
             }
             return Ok(await _pendingChangesService.ReturnListPendingStudents());
         }
 
-        [HttpPut("upload-usmeni/uvid")]
-        public async Task<IActionResult> UploadUsmeniUvid(IFormFile file)
+        [HttpPut("upload-usmeni/uvid/{predmetId}")]
+        public async Task<IActionResult> UploadUsmeniUvid(IFormFile file, int predmetId)
         {
             _logger.LogInformation("UploadUsmeni method called");
             if (file == null || file.Length == 0)
@@ -231,7 +232,7 @@ namespace AcademicManagmentSystem.API.Controllers
 
             foreach (var record in records)
             {
-                await _pendingChangesService.ProcessPendingUsmeni(record);
+                await _pendingChangesService.ProcessPendingUsmeni(record, predmetId);
             }
             return Ok(await _pendingChangesService.ReturnListPendingStudents());
         }
@@ -243,7 +244,7 @@ namespace AcademicManagmentSystem.API.Controllers
             return Ok(pendingChanges);
         }
 
-        [HttpDelete("remove-pending/{guid}")]
+        [HttpDelete("rollback/{guid}")]
         public async Task<IActionResult> RemovePendingChanges(Guid guid)
         {
             var result = await _pendingChangesService.RemovePendingChanges(guid);
@@ -269,14 +270,14 @@ namespace AcademicManagmentSystem.API.Controllers
 
             return Ok("Pending promene su uspešno upisane u bazu.");
         }
-        [HttpGet("rolback/all")]
+        [HttpGet("pre-commit/all")]
         public IActionResult GetAllRollbacks()
         {
             var pendingChanges = _pendingChangesService.GetAllRollbacks();
             return Ok(pendingChanges);
         }
 
-        [HttpPost("rollback-pending/{guid}")]
+        [HttpPost("ponisti-commit/{guid}")]
         public async Task<IActionResult> RollbackPendingChanges(string guid)
         {
             var result = await _pendingChangesService.RollbackChanges(Guid.Parse(guid)); if (!result)
