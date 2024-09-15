@@ -8,10 +8,9 @@ namespace AcademicManagmentSystem.API.Core.Services.Interface
         Task<int?> GetPredmetIdBySifraAsync(string sifra);
         Task <IEnumerable<GetPredmetDto>> GetAllSubjects();
         Task <GetPredmetDetailsDto> GetDetailsForSubject(int id);
-
+        Task <UpdatePredmetDto> GetSubject(int id);
         Task<Predmet> CreateSubject (CreatePredmetDto createPredmetDto);
         Task<Predmet> UpdateSubject (int id, UpdatePredmetDto updatePredmetDto);
-
         Task<bool> DeletePredmetAsync(int id);
     }
 }

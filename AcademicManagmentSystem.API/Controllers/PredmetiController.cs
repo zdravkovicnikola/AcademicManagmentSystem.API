@@ -31,9 +31,9 @@ namespace AcademicManagmentSystem.API.Controllers
             }
         }
 
-        // GET: api/Predmeti/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GetPredmetDetailsDto>> GetPredmet(int id)
+        // GET: api/Predmeti/details/5
+        [HttpGet("details/{id}")]
+        public async Task<ActionResult<GetPredmetDetailsDto>> GetDetailsForSubject(int id)
         {
             try
             {
@@ -46,10 +46,26 @@ namespace AcademicManagmentSystem.API.Controllers
             }
         }
 
+        // GET: api/Predmeti/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UpdatePredmetDto>> GetSubject(int id)
+        {
+            try
+            {
+                var results = await _predmetService.GetSubject(id);
+                return Ok(results);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         // PUT: api/Predmeti/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPredmet(int id, UpdatePredmetDto updatePredmetDto)
+        public async Task<IActionResult> UpdateSubject(int id, UpdatePredmetDto updatePredmetDto)
         {
             try
             {
@@ -72,7 +88,7 @@ namespace AcademicManagmentSystem.API.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<Predmet>> PostPredmet(CreatePredmetDto kreirajPredmetDto)
+        public async Task<ActionResult<Predmet>> CreateSubject(CreatePredmetDto kreirajPredmetDto)
         {
              try
             {
@@ -92,10 +108,10 @@ namespace AcademicManagmentSystem.API.Controllers
             var success = await _predmetService.DeletePredmetAsync(id);
             if (!success)
             {
-                return NotFound(); // Deo nije pronađen
+                return NotFound();
             }
 
-            return NoContent(); // Uspešno obrisano
+            return NoContent();
         }
     }
 }

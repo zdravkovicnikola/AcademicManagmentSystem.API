@@ -23,6 +23,10 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
         public async Task<Predmet> CreateSubject(CreatePredmetDto createPredmetDto)
         {
             var predmet = _mapper.Map<Predmet>(createPredmetDto);
+            if (await _predmetiRepository.GetAsyncByPass(createPredmetDto.Sifra) != null )
+            {
+                throw new ArgumentException("Šifra predmeta mora biti unikatna.");
+            }
             await _predmetiRepository.AddAsync(predmet);
             return predmet;
         }
@@ -70,6 +74,13 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             return predmet?.PredmetId;
         }
 
+        public async Task<UpdatePredmetDto> GetSubject(int id)
+        {
+            var predmet = await _predmetiRepository.GetAsync(id);
+            var updatePred = _mapper.Map<UpdatePredmetDto>(predmet);
+            return updatePred;
+        }
+
         public async Task<Predmet> UpdateSubject(int id, UpdatePredmetDto updatePredmetDto)
         {
             var predmet = await _predmetiRepository.GetAsync(id);
@@ -77,9 +88,12 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             {
                 throw new InvalidOperationException("Predmet sa zadatim ID-om ne postoji.");
             }
-
+            if ((await _predmetiRepository.GetAsyncByPass(updatePredmetDto.Sifra) != null) && (updatePredmetDto.Sifra != predmet.Sifra))
+            {
+                throw new InvalidOperationException("Šifra predmeta mora biti unikatna.");
+            }
             _mapper.Map(updatePredmetDto, predmet);
-
+            
             try
             {
                 await _predmetiRepository.UpdateAsync(predmet);

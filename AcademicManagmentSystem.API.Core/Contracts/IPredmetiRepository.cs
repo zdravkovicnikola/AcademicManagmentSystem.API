@@ -7,6 +7,6 @@ namespace AcademicManagmentSystem.API.Contracts
         Task<Predmet> GetDetailsPredavac(int id);
         Task<Predmet> GetAsyncByPass (string sifra);
         Task<int> GetBrojTipovaDelova(int predmetId);
-
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AcademicManagmentSystem.API.Core.Services.Interface;
-using AcademicManagmentSystem.API.Data;
+using AcademicManagmentSystem.API.Core.Models.Predmeti;
+using AcademicManagmentSystem.API.Core.Models;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
@@ -38,7 +39,6 @@ namespace AcademicManagmentSystem.API.Controllers
             }
         }
 
-
         // GET: api/Delovi
         [HttpGet("resultsForStudent")]
         public async Task<IActionResult> GetAllResultsForStudent(string sifraPredmeta, string indeks)
@@ -68,21 +68,21 @@ namespace AcademicManagmentSystem.API.Controllers
             }
         }
 
-        
+
 
         [HttpPost("upload-usmeni/{predmetId}")]
         public async Task<IActionResult> UploadUsmeni(IFormFile file, int predmetId)
         {
-            _logger.LogInformation("UploadUsmeni method called");
-            if (file == null || file.Length == 0)
+            var errorResponse = _csvService.ValidateCsvFile(file);
+            if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest("Invalid file.");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
             _logger.LogInformation($"Saving file to {filePath}");
-            
+
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
@@ -90,27 +90,37 @@ namespace AcademicManagmentSystem.API.Controllers
 
             var records = _csvService.LoadCsvData(filePath);
 
-            foreach (var record in records)
+            errorResponse = _csvService.ValidateCsvContent(records, isUsmeni: true);
+            if (errorResponse != null)
+            {
+                _logger.LogWarning("Invalid CSV content");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+            }
+
+            _logger.LogInformation("CSV data loaded successfully");
+            var validRecords = records.Skip(1);
+
+            foreach (var record in validRecords)
             {
                 await _uploadExamService.ProcessOrUpdateUsmeniRecord(record,false, predmetId);
             }
 
-            return Ok("Usmeni CSV data successfully uploaded.");
+            return Ok("Sistem je uspešno sačuvao rezultate usmenog dela ispita.");
         }
-
 
         [HttpPost("upload-prakticni/{predmetId}")]
         public async Task<IActionResult> UploadPrakticni(IFormFile file, int predmetId)
         {
-            _logger.LogInformation("UploadPrakticni method called");
-            if (file == null || file.Length == 0)
+            var errorResponse = _csvService.ValidateCsvFile(file);
+            if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest("Invalid file.");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
             _logger.LogInformation($"Saving file to {filePath}");
+
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
@@ -118,27 +128,36 @@ namespace AcademicManagmentSystem.API.Controllers
 
             var records = _csvService.LoadCsvData(filePath);
 
-            _logger.LogInformation("CSV data loaded");
-            foreach (var record in records)
+            errorResponse = _csvService.ValidateCsvContent(records, isUsmeni: false);
+            if (errorResponse != null)
+            {
+                _logger.LogWarning("Invalid CSV content");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+            }
+
+            _logger.LogInformation("CSV data loaded successfully");
+            var validRecords = records.Skip(1);
+
+            foreach (var record in validRecords)
             {
                 await _uploadExamService.ProcessOrUpdatePrakticniRecord(record, false, predmetId);
             }
-
-            return Ok("Prakticni CSV data successfully uploaded.");
+            return Ok("Sistem je uspešno sačuvao rezultate pismenog dela ispita.");
         }
 
         [HttpPut("update-prakticni/{predmetId}")]
         public async Task<IActionResult> UpdatePrakticni(IFormFile file, int predmetId)
         {
-            _logger.LogInformation("UploadPrakticni method called");
-            if (file == null || file.Length == 0)
+            var errorResponse = _csvService.ValidateCsvFile(file);
+            if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest("Invalid file.");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
             _logger.LogInformation($"Saving file to {filePath}");
+
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
@@ -146,23 +165,32 @@ namespace AcademicManagmentSystem.API.Controllers
 
             var records = _csvService.LoadCsvData(filePath);
 
-            _logger.LogInformation("CSV data loaded");
-            foreach (var record in records)
+            errorResponse = _csvService.ValidateCsvContent(records, isUsmeni: false);
+            if (errorResponse != null)
+            {
+                _logger.LogWarning("Invalid CSV content");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+            }
+
+            _logger.LogInformation("CSV data loaded successfully");
+
+            var validRecords = records.Skip(1);
+            foreach (var record in validRecords)
             {
                 await _uploadExamService.ProcessOrUpdatePrakticniRecord(record, true, predmetId);
             }
 
-            return Ok("Prakticni CSV data successfully uploaded.");
+            return Ok("Sistem je uspešno ažurirao rezultate praktičnog dela.");
         }
 
         [HttpPut("update-usmeni/{predmetId}")]
         public async Task<IActionResult> UpdateUsmeni(IFormFile file, int predmetId)
         {
-            _logger.LogInformation("UpdateUsmeni method called");
-            if (file == null || file.Length == 0)
+            var errorResponse = _csvService.ValidateCsvFile(file);
+            if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest("Invalid file.");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -175,22 +203,32 @@ namespace AcademicManagmentSystem.API.Controllers
 
             var records = _csvService.LoadCsvData(filePath);
 
-            foreach (var record in records)
+            errorResponse = _csvService.ValidateCsvContent(records, isUsmeni: true);
+            if (errorResponse != null)
+            {
+                _logger.LogWarning("Invalid CSV content");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+            }
+
+            _logger.LogInformation("CSV data loaded successfully");
+            var validRecords = records.Skip(1);
+
+            foreach (var record in validRecords)
             {
                 await _uploadExamService.ProcessOrUpdateUsmeniRecord(record,true, predmetId);
             }
 
-            return Ok("Usmeni CSV data successfully uploaded.");
+            return Ok("Sistem je uspešno ažurirao rezultate usmenog dela .");
         }
 
         [HttpPut("upload-prakticni/uvid/{predmetId}")]
         public async Task<IActionResult> UploadPrakticniUvid(IFormFile file, int predmetId)
         {
-            _logger.LogInformation("UploadUsmeni method called");
-            if (file == null || file.Length == 0)
+            var errorResponse = _csvService.ValidateCsvFile(file);
+            if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest("Invalid file.");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -203,7 +241,17 @@ namespace AcademicManagmentSystem.API.Controllers
 
             var records = _csvService.LoadCsvData(filePath);
 
-            foreach (var record in records)
+            errorResponse = _csvService.ValidateCsvContent(records, isUsmeni: false);
+            if (errorResponse != null)
+            {
+                _logger.LogWarning("Invalid CSV content");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+            }
+
+            _logger.LogInformation("CSV data loaded successfully");
+            var validRecords = records.Skip(1);
+
+            foreach (var record in validRecords)
             {
                 await _pendingChangesService.ProcessPendingPrakticni(record, predmetId);
             }
@@ -213,11 +261,11 @@ namespace AcademicManagmentSystem.API.Controllers
         [HttpPut("upload-usmeni/uvid/{predmetId}")]
         public async Task<IActionResult> UploadUsmeniUvid(IFormFile file, int predmetId)
         {
-            _logger.LogInformation("UploadUsmeni method called");
-            if (file == null || file.Length == 0)
+            var errorResponse = _csvService.ValidateCsvFile(file);
+            if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest("Invalid file.");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -230,12 +278,23 @@ namespace AcademicManagmentSystem.API.Controllers
 
             var records = _csvService.LoadCsvData(filePath);
 
-            foreach (var record in records)
+            errorResponse = _csvService.ValidateCsvContent(records, isUsmeni: true);
+            if (errorResponse != null)
+            {
+                _logger.LogWarning("Invalid CSV content");
+                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+            }
+
+            _logger.LogInformation("CSV data loaded successfully");
+            var validRecords = records.Skip(1);
+
+            foreach (var record in validRecords)
             {
                 await _pendingChangesService.ProcessPendingUsmeni(record, predmetId);
             }
             return Ok(await _pendingChangesService.ReturnListPendingStudents());
         }
+
 
         [HttpGet("pending/all")]
         public IActionResult GetAllPendingChanges()
@@ -257,7 +316,6 @@ namespace AcademicManagmentSystem.API.Controllers
             return Ok("Pending promene su uspešno uklonjene.");
         }
 
-
         [HttpPost("commit-pending/{guid}")]
         public async Task<IActionResult> CommitPendingChanges(Guid guid)
         {
@@ -270,13 +328,14 @@ namespace AcademicManagmentSystem.API.Controllers
 
             return Ok("Pending promene su uspešno upisane u bazu.");
         }
+        
         [HttpGet("pre-commit/all")]
         public IActionResult GetAllRollbacks()
         {
             var pendingChanges = _pendingChangesService.GetAllRollbacks();
             return Ok(pendingChanges);
         }
-
+        
         [HttpPost("ponisti-commit/{guid}")]
         public async Task<IActionResult> RollbackPendingChanges(string guid)
         {
@@ -287,7 +346,6 @@ namespace AcademicManagmentSystem.API.Controllers
 
             return Ok("Promene su uspešno rollback-ovane za dati GUID.");
         }
-
 
         // DELETE: api/Delovi/5
         [HttpDelete("{id}")]
