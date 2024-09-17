@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+/front_ams/node_modules/
+/bek_ams/node_modules/

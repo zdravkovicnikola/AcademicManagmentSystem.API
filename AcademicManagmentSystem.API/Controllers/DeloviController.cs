@@ -77,7 +77,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da sačuva rezultate usmenog dela. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -94,7 +94,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid CSV content");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da sačuva rezultate usmenog dela. Razlog: {errorResponse}");
             }
 
             _logger.LogInformation("CSV data loaded successfully");
@@ -115,7 +115,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da sačuva rezultate pismenog dela. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -132,7 +132,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid CSV content");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da sačuva rezultate pismenog dela. Razlog: {errorResponse}");
             }
 
             _logger.LogInformation("CSV data loaded successfully");
@@ -152,7 +152,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da ažurira rezultate pismenog dela. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -169,7 +169,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid CSV content");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da ažurira rezultate pismenog dela. Razlog: {errorResponse}");
             }
 
             _logger.LogInformation("CSV data loaded successfully");
@@ -180,7 +180,7 @@ namespace AcademicManagmentSystem.API.Controllers
                 await _uploadExamService.ProcessOrUpdatePrakticniRecord(record, true, predmetId);
             }
 
-            return Ok("Sistem je uspešno ažurirao rezultate praktičnog dela.");
+            return Ok("Sistem je uspešno ažurirao rezultate pismenog dela.");
         }
 
         [HttpPut("update-usmeni/{predmetId}")]
@@ -190,7 +190,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da ažurira rezultate usmenog dela. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -207,7 +207,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid CSV content");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem nije uspeo da ažurira rezultate usmenog dela. Razlog: {errorResponse}");
             }
 
             _logger.LogInformation("CSV data loaded successfully");
@@ -265,7 +265,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem je neuspešno ažurirao rezultate usmenog dela. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -282,7 +282,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid CSV content");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem je neuspešno ažurirao rezultate usmenog dela. Razlog: {errorResponse}");
             }
 
             _logger.LogInformation("CSV data loaded successfully");
@@ -295,7 +295,6 @@ namespace AcademicManagmentSystem.API.Controllers
             return Ok(await _pendingChangesService.ReturnListPendingStudents());
         }
 
-
         [HttpGet("pending/all")]
         public IActionResult GetAllPendingChanges()
         {
@@ -304,16 +303,15 @@ namespace AcademicManagmentSystem.API.Controllers
         }
 
         [HttpDelete("rollback/{guid}")]
-        public async Task<IActionResult> RemovePendingChanges(Guid guid)
+        public async Task<IActionResult> RollbackPendingChanges(Guid guid)
         {
-            var result = await _pendingChangesService.RemovePendingChanges(guid);
 
+            var result = await _pendingChangesService.RollbackChanges(guid); 
             if (!result)
             {
-                return BadRequest("Nema pending promena za uklanjanje za dati GUID.");
+                return BadRequest("Nema rollback promena za upis u bazu za dati GUID.");
             }
-
-            return Ok("Pending promene su uspešno uklonjene.");
+            return Ok("Sistem je obrisao rezultate studenata");
         }
 
         [HttpPost("commit-pending/{guid}")]
@@ -326,7 +324,7 @@ namespace AcademicManagmentSystem.API.Controllers
                 return BadRequest("Nema pending promena za upis u bazu za dati GUID.");
             }
 
-            return Ok("Pending promene su uspešno upisane u bazu.");
+            return Ok("Sistem je uspešno potvrdio izmene");
         }
         
         [HttpGet("pre-commit/all")]
@@ -337,14 +335,16 @@ namespace AcademicManagmentSystem.API.Controllers
         }
         
         [HttpPost("ponisti-commit/{guid}")]
-        public async Task<IActionResult> RollbackPendingChanges(string guid)
+        public async Task<IActionResult> CancellCommit(Guid guid)
         {
-            var result = await _pendingChangesService.RollbackChanges(Guid.Parse(guid)); if (!result)
+            var result = await _pendingChangesService.CancellCommit(guid);
+
+            if (!result)
             {
-                return BadRequest("Nema rollback promena za upis u bazu za dati GUID.");
+                return BadRequest("Za dati guid ne može da se izvrši poništavanje izmene.");
             }
 
-            return Ok("Promene su uspešno rollback-ovane za dati GUID.");
+            return Ok("Sistem je uspešno poništio prethodnu izmenu");
         }
 
         // DELETE: api/Delovi/5

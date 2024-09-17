@@ -17,8 +17,20 @@ namespace AcademicManagmentSystem.API.Repository {
         }
         public async Task<T> AddAsync(T entity)
         {
-            await _context.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    await _context.AddAsync(entity);
+                    await _context.SaveChangesAsync();
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
             return entity;
         }
 

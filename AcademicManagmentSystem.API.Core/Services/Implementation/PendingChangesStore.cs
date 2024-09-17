@@ -37,18 +37,18 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
         _rollbackStore[key] = rollbackData;
         }
     
-        public List<PendingStudentDto> GetRollbackData(Guid key)
+        public List<PendingStudentDto> GetCommitData(Guid key)
         {
         _rollbackStore.TryGetValue(key, out var rollbackData);
         return rollbackData;
         }
 
-        public void RemoveRollbackData(Guid key)
+        public void RemoveCommitData(Guid key)
         {
         _rollbackStore.Remove(key);
         }
 
-        public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetRollbackData()
+        public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetCommitData()
         {
         return _rollbackStore.ToList();
         }

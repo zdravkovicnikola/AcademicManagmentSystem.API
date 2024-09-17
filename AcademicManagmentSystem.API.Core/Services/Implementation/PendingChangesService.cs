@@ -229,15 +229,15 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             }
         }
 
-        public async Task<bool> RollbackChanges(Guid guid)
+        public async Task<bool> CancellCommit(Guid guid)
         {
-            var rollbackData = _pendingStudentsDictionary.GetRollbackData(guid);
+            var commitData = _pendingStudentsDictionary.GetCommitData(guid);
 
-            if (rollbackData == null || !rollbackData.Any())
+            if (commitData == null || !commitData.Any())
             {
                 return false;
             }
-            foreach(var rollbackStudent in  rollbackData) { 
+            foreach(var rollbackStudent in commitData) { 
 
                 var studentFromDb = await _studentRepository.GetAsyncStudent(rollbackStudent.Index);
 
@@ -260,11 +260,11 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                     // Save
                     await _studentRepository.UpdateAsync(studentFromDb);
                     await _deloviRepository.UpdateAsync(deoToUpdate);
-                    }
+                }
             }
 
             // Ukloni rollback podatke nakon izvršenog rollback-a
-            _pendingStudentsDictionary.RemoveRollbackData(guid);
+            _pendingStudentsDictionary.RemoveCommitData(guid);
             return true;
         }
         private string ReplaceSerbianMonths(string datum)
@@ -289,9 +289,9 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
         }
         public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetAllRollbacks()
         {
-            return _pendingStudentsDictionary.GetRollbackData();
+            return _pendingStudentsDictionary.GetCommitData();
         }
-        public async Task<bool> RemovePendingChanges(Guid guid)
+        public async Task<bool> RollbackChanges(Guid guid)
         {
             
             var pendingStudents = _pendingStudentsDictionary.GetPendingStudents(guid);

@@ -10,10 +10,10 @@ namespace AcademicManagmentSystem.API.Core.Services.Interface
         public List<PendingStudentDto> GetPendingStudents(Guid key);
         public void RemovePendingStudents(Guid key);
         public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetAllPendingChanges();
-        public List<PendingStudentDto> GetRollbackData(Guid guid);
-        public void RemoveRollbackData(Guid key);
+        public List<PendingStudentDto> GetCommitData(Guid guid);
+        public void RemoveCommitData(Guid key);
         public void AddToRollbackStore(Guid key, List<PendingStudentDto> rollbackData);
-        List<KeyValuePair<Guid, List<PendingStudentDto>>> GetRollbackData();
+        List<KeyValuePair<Guid, List<PendingStudentDto>>> GetCommitData();
 
     }
 }

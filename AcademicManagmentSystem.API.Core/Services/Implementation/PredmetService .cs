@@ -11,13 +11,13 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
     {
         private readonly IPredmetiRepository _predmetiRepository;
         private readonly IMapper _mapper;
-        private readonly IDeloviService _deloviService;
+        private readonly IDeloviRepository _deloviRepository;
 
-        public PredmetService(IPredmetiRepository predmetiRepository, IMapper mapper, IDeloviService deloviService)
+        public PredmetService(IPredmetiRepository predmetiRepository, IMapper mapper, IDeloviRepository deloviRepository)
         {
             _predmetiRepository = predmetiRepository;
             _mapper = mapper;
-            _deloviService = deloviService;
+            _deloviRepository = deloviRepository;
         }
 
         public async Task<Predmet> CreateSubject(CreatePredmetDto createPredmetDto)
@@ -53,7 +53,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
         {
             var predmet = await _predmetiRepository.GetDetailsPredavac(id);
             // Fetch the distinct types for the subject
-            var tipovi = await _deloviService.GetTipoviForSubject(id);
+            var tipovi = await _deloviRepository.GetTipoviForSubject(id);
 
             if (predmet == null || tipovi == null)
             {
