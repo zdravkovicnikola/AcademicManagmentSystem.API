@@ -1,0 +1,8 @@
+# Node modules folder (ako koristite Node.js)
+node_modules/
+
+# Build output folder
+build/
+
+# Environment variables file
+*.env
