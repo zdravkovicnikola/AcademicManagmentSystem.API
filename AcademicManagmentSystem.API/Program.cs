@@ -16,23 +16,13 @@ builder.Services.AddDbContext<AcademicManagmentSystemDbContext>(options =>
 {
     options.UseSqlServer(connectionSting);
 });
-// Add services to the container.
+
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-
-    // Уклоните ову линију, јер може изазвати проблеме
-    // c.DocInclusionPredicate((docName, apiDesc) =>
-    // {
-    //     var assemblyName = apiDesc.ControllerTypeInfo.Assembly.GetName().Name;
-    //     return assemblyName.StartsWith("YourProjectNamespace");
-    // });
-
-    // Додајте овај ред уместо претходног
     c.CustomSchemaIds(type => type.FullName);
 });
 
@@ -42,7 +32,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", builder =>
     {
-        builder.WithOrigins("http://localhost:3000") // Tvoj React app URL
+        builder.WithOrigins("http://localhost:3000")
                .AllowAnyHeader()
                .AllowAnyMethod();
     });
@@ -52,9 +42,9 @@ builder.Services.AddCors(options =>
 
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration)); 
 
-builder.Services.AddAutoMapper(typeof(MapperConfig));//ukljucujemo automapper u projekat 
+builder.Services.AddAutoMapper(typeof(MapperConfig));
 
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); //Ovo ce vaziti u duzini jednog HTTP zahteva
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICsvService, CsvService>();
 builder.Services.AddScoped<IUploadExamService, UploadExamService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -65,25 +55,24 @@ builder.Services.AddScoped<IOcenaService, OcenaService>();
 builder.Services.AddSingleton<IPendingChangesStore, PendingChangesStore>();
 
 
-builder.Services.AddScoped<IPredmetiRepository, PredmetiRepository>();//Ovo ce vaziti u duzini jednog HTTP zahteva
+builder.Services.AddScoped<IPredmetiRepository, PredmetiRepository>();
 builder.Services.AddScoped<IDeloviRepository,DeloviRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ITipRepository, TipRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseSerilogRequestLogging(); // ovo je middleware koji dolazi uz Serilog i koristi se za automatsko logovanje informacija o HTTP zahtevima i odgovorima
-
+app.UseSerilogRequestLogging(); 
 app.UseRouting();
 
-// Aktiviraj CORS politiku
+
 app.UseCors("AllowFrontend");
 
 app.UseEndpoints(endpoints =>

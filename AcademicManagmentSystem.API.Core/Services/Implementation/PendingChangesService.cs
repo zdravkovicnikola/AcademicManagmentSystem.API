@@ -138,10 +138,8 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
         }
         public async Task<List<PendingStudentDto>> ReturnListPendingStudents()
         {
-            //GUID
             var guid = Guid.NewGuid();
 
-            //mapiranje Studenta u PendingStudentDto
             var result = pendingStudents.Select(student =>
             {
                 var studentDto = _mapper.Map<PendingStudentDto>(student);
@@ -150,11 +148,9 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
                 return studentDto;
             }).ToList();
 
-            // Cuvaj listu u dictionary sa GUID-om kao ključem
             _pendingStudentsDictionary.AddPendingStudents(guid, result);
             pendingStudents = new List<Student>();
 
-            // Vracamo GUID i listu kao tuple
             return (result);
         }
         public async Task<bool> CommitPendingChanges(Guid guid)
@@ -162,7 +158,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             
             var pendingStudents = _pendingStudentsDictionary.GetPendingStudents(guid);
 
-            if (pendingStudents == null || !pendingStudents.Any())
+            if (pendingStudents.Count == 0 || !pendingStudents.Any())
             {
                 return false;
             }
@@ -229,7 +225,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Implementation
             }
         }
 
-        public async Task<bool> CancellCommit(Guid guid)
+        public async Task<bool> CancelCommit(Guid guid)
         {
             var commitData = _pendingStudentsDictionary.GetCommitData(guid);
 

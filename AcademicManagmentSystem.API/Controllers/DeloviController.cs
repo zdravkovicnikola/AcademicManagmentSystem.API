@@ -2,6 +2,7 @@
 using AcademicManagmentSystem.API.Core.Services.Interface;
 using AcademicManagmentSystem.API.Core.Models.Predmeti;
 using AcademicManagmentSystem.API.Core.Models;
+using AcademicManagmentSystem.API.Core.Models.Studenti;
 
 namespace AcademicManagmentSystem.API.Controllers
 {
@@ -41,7 +42,7 @@ namespace AcademicManagmentSystem.API.Controllers
 
         // GET: api/Delovi
         [HttpGet("resultsForStudent")]
-        public async Task<IActionResult> GetAllResultsForStudent(string sifraPredmeta, string indeks)
+        public async Task<IActionResult> GetAllResultsForSubjectAndStudent(string sifraPredmeta, string indeks)
         {
             try
             {
@@ -245,7 +246,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid CSV content");
-                return BadRequest($"Sistem nije uspeo da obradi zahtev. Razlog: {errorResponse}");
+                return BadRequest($"Sistem ne može da učita rezultate studenata. Razlog: {errorResponse}");
             }
 
             _logger.LogInformation("CSV data loaded successfully");
@@ -265,7 +266,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid file");
-                return BadRequest($"Sistem je neuspešno ažurirao rezultate usmenog dela. Razlog: {errorResponse}");
+                return BadRequest($"Sistem ne može da učita rezultate studenata. Razlog: {errorResponse}");
             }
 
             var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
@@ -282,7 +283,7 @@ namespace AcademicManagmentSystem.API.Controllers
             if (errorResponse != null)
             {
                 _logger.LogWarning("Invalid CSV content");
-                return BadRequest($"Sistem je neuspešno ažurirao rezultate usmenog dela. Razlog: {errorResponse}");
+                return BadRequest($"Sistem ne može da učita rezultate studenata. Razlog: {errorResponse}");
             }
 
             _logger.LogInformation("CSV data loaded successfully");
@@ -292,7 +293,10 @@ namespace AcademicManagmentSystem.API.Controllers
             {
                 await _pendingChangesService.ProcessPendingUsmeni(record, predmetId);
             }
-            return Ok(await _pendingChangesService.ReturnListPendingStudents());
+            if ((await _pendingChangesService.ReturnListPendingStudents()).Count == 0)
+                return BadRequest($"Sistem ne može da učita rezultate studenata.");
+
+            return Ok("Sistem je uspešno evidentirao rezultate.");
         }
 
         [HttpGet("pending/all")]
@@ -321,7 +325,7 @@ namespace AcademicManagmentSystem.API.Controllers
 
             if (!result)
             {
-                return BadRequest("Nema pending promena za upis u bazu za dati GUID.");
+                return BadRequest("Sistem je neuspešno ažurirao rezultate usmenog dela. Pokušajte ponovo kasnije.");
             }
 
             return Ok("Sistem je uspešno potvrdio izmene");
@@ -335,9 +339,9 @@ namespace AcademicManagmentSystem.API.Controllers
         }
         
         [HttpPost("ponisti-commit/{guid}")]
-        public async Task<IActionResult> CancellCommit(Guid guid)
+        public async Task<IActionResult> CancelCommit(Guid guid)
         {
-            var result = await _pendingChangesService.CancellCommit(guid);
+            var result = await _pendingChangesService.CancelCommit(guid);
 
             if (!result)
             {

@@ -13,7 +13,7 @@ namespace AcademicManagmentSystem.API.Core.Services.Interface
         public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetAllPendingChanges();
         public List<KeyValuePair<Guid, List<PendingStudentDto>>> GetAllRollbacks();
         Task<bool> RollbackChanges(Guid guid);
-        Task<bool> CancellCommit(Guid guid);
+        Task<bool> CancelCommit(Guid guid);
 
     }
 }
